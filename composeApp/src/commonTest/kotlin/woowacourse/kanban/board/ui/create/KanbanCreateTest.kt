@@ -1,4 +1,4 @@
-package woowacourse.kanban.board.create
+package woowacourse.kanban.board.ui.create
 
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.assertIsEnabled

@@ -1,4 +1,4 @@
-package woowacourse.kanban.board.kanban
+package woowacourse.kanban.board.ui.card
 
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.assertIsDisplayed
@@ -8,8 +8,6 @@ import kotlin.test.Test
 import woowacourse.kanban.board.model.Card
 import woowacourse.kanban.board.model.Tag
 import woowacourse.kanban.board.model.User
-import woowacourse.kanban.board.ui.card.KanbanCard
-
 @OptIn(ExperimentalTestApi::class)
 class KanbanCardUiTest {
     @Test

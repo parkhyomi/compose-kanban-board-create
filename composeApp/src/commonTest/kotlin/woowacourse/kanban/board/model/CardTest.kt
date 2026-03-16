@@ -1,12 +1,8 @@
-package woowacourse.kanban.board.kanban
+package woowacourse.kanban.board.model
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFails
-import woowacourse.kanban.board.model.Card
-import woowacourse.kanban.board.model.Tag
-import woowacourse.kanban.board.model.User
-
 class CardTest {
 
     @Test

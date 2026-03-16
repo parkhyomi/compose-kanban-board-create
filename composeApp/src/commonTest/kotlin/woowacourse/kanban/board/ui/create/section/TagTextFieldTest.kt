@@ -1,4 +1,4 @@
-package woowacourse.kanban.board.create
+package woowacourse.kanban.board.ui.create.section
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -10,7 +10,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.runComposeUiTest
 import org.junit.Test
-import woowacourse.kanban.board.ui.create.section.TagArea
+import woowacourse.kanban.board.ui.create.maincontent.TagArea
 import woowacourse.kanban.board.ui.create.validateTagInput
 
 @OptIn(ExperimentalTestApi::class)

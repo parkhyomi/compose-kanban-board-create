@@ -1,4 +1,4 @@
-package woowacourse.kanban.board.kanban
+package woowacourse.kanban.board.ui.card
 
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.assertIsDisplayed
@@ -6,10 +6,8 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.runComposeUiTest
 import kotlin.test.Test
 import woowacourse.kanban.board.model.User
-import woowacourse.kanban.board.ui.card.CardUserProfile
-
 @OptIn(ExperimentalTestApi::class)
-class UserProfileUiTest {
+class CardUserProfileUiTest {
 
     @Test
     fun `유저가 null인 경우 - 알 수 없는 유저 노출`() = runComposeUiTest {
