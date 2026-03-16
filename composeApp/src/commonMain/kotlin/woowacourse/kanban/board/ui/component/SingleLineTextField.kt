@@ -70,7 +70,7 @@ fun SingleLineTextField(
 
 @Composable
 @Preview(showBackground = true)
-private fun SingLineTextFieldPreview() {
+private fun SingleLineTextFieldPreview() {
     SingleLineTextField(
         placeHolderMessage = "제목을 입력해주세요.",
         isError = false,

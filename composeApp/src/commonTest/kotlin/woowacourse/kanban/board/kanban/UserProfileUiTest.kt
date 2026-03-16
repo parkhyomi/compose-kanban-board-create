@@ -6,7 +6,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.runComposeUiTest
 import kotlin.test.Test
 import woowacourse.kanban.board.model.User
-import woowacourse.kanban.board.ui.UserProfile
+import woowacourse.kanban.board.ui.card.CardUserProfile
 
 @OptIn(ExperimentalTestApi::class)
 class UserProfileUiTest {
@@ -14,7 +14,7 @@ class UserProfileUiTest {
     @Test
     fun `유저가 null인 경우 - 알 수 없는 유저 노출`() = runComposeUiTest {
         setContent {
-            UserProfile(
+            CardUserProfile(
                 null,
             )
         }
@@ -26,7 +26,7 @@ class UserProfileUiTest {
     fun `전달된 유저 이름 표시`() = runComposeUiTest {
         val given = "다이노"
         setContent {
-            UserProfile(
+            CardUserProfile(
                 User(given),
             )
         }

@@ -10,7 +10,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performTextClearance
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.runComposeUiTest
-import woowacourse.kanban.board.ui.create.maincontent.TitleArea
+import woowacourse.kanban.board.ui.create.section.TitleArea
 import kotlin.test.Test
 
 

@@ -2,15 +2,10 @@ package woowacourse.kanban.board.ui.create.maincontent
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.runtime.Composable
@@ -23,7 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import woowacourse.kanban.board.model.User
-import woowacourse.kanban.board.ui.UserProfile
+import woowacourse.kanban.board.ui.card.CardUserProfile
 import woowacourse.kanban.board.ui.component.Label
 
 @Composable
@@ -43,7 +38,7 @@ fun ManagerSelector(
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 users.forEach { manager ->
-                    ManagerChip(
+                    ManagerSelectorChip(
                         managers = manager,
                         selectedUser = manager == selectedUser,
                         onUserChange = { onUserChange(manager) },
@@ -59,7 +54,7 @@ fun ManagerSelector(
 }
 
 @Composable
-fun ManagerChip(
+fun ManagerSelectorChip(
     managers: User,
     selectedUser: Boolean,
     onUserChange: () -> Unit,
@@ -69,7 +64,7 @@ fun ManagerChip(
         selected = selectedUser,
         onClick = onUserChange,
         label = {
-            UserProfile(user = managers, Modifier.padding(vertical = 16.dp))
+            CardUserProfile(user = managers, Modifier.padding(vertical = 16.dp))
         },
         colors = FilterChipDefaults.filterChipColors(
             containerColor = Color.White,
@@ -111,7 +106,7 @@ private fun ManagerPreview() {
 @Composable
 @Preview(showBackground = true)
 private fun ManagerChipPreview() {
-    ManagerChip(
+    ManagerSelectorChip(
         managers = User("김철수"),
         selectedUser = true,
         onUserChange = {},

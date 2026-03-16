@@ -15,7 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun Header(
+fun KanbanCreateHeader(
     modifier: Modifier = Modifier,
     onDismiss: () -> Unit,
 ) {
@@ -42,7 +42,7 @@ fun Header(
 @Composable
 @Preview(showBackground = true)
 private fun HeaderPreview() {
-    Header(
+    KanbanCreateHeader(
         onDismiss = {},
     )
 }

@@ -20,7 +20,7 @@ import woowacourse.kanban.board.ui.theme.Gray300
 import woowacourse.kanban.board.ui.theme.Gray700
 
 @Composable
-fun Footer(
+fun KanbanCreateFooter(
     modifier: Modifier = Modifier,
     onClickCancel: () -> Unit,
     onClickConfirm: () -> Unit,
@@ -32,8 +32,8 @@ fun Footer(
             .padding(horizontal = 24.dp, vertical = 8.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.End),
     ) {
-        CancelButton(onClickCancel = onClickCancel)
-        ConfirmButton(
+        KanbanCreateCancelButton(onClickCancel = onClickCancel)
+        KanbanCreateConfirmButton(
             onClickConfirm = onClickConfirm,
             enabled = enabled
         )
@@ -41,7 +41,7 @@ fun Footer(
 }
 
 @Composable
-fun CancelButton(
+fun KanbanCreateCancelButton(
     modifier: Modifier = Modifier,
     onClickCancel: () -> Unit,
     enabled: Boolean = true,
@@ -64,7 +64,7 @@ fun CancelButton(
 }
 
 @Composable
-fun ConfirmButton(
+fun KanbanCreateConfirmButton(
     modifier: Modifier = Modifier,
     onClickConfirm: () -> Unit,
     enabled: Boolean = true,
@@ -92,7 +92,7 @@ fun ConfirmButton(
 @Composable
 @Preview(showBackground = true)
 private fun FooterPreview() {
-    Footer(
+    KanbanCreateFooter(
         onClickCancel = {},
         onClickConfirm = {},
     )

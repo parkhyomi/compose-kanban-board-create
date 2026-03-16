@@ -5,7 +5,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.window.Dialog
 
 @Composable
-fun KanbanDialog(
+fun KanbanCreateDialog(
     onDismissRequest: () -> Unit
 ) {
     Dialog(
@@ -21,7 +21,7 @@ fun KanbanDialog(
 @Composable
 @Preview(showBackground = true)
 private fun KanbanDialogPreview() {
-    KanbanDialog(
+    KanbanCreateDialog(
         onDismissRequest = {}
     )
 }

@@ -10,8 +10,8 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.runComposeUiTest
 import org.junit.Test
-import woowacourse.kanban.board.ui.create.maincontent.TagArea
-import woowacourse.kanban.board.ui.create.validateTag
+import woowacourse.kanban.board.ui.create.section.TagArea
+import woowacourse.kanban.board.ui.create.validateTagInput
 
 @OptIn(ExperimentalTestApi::class)
 class TagTextFieldTest {
@@ -28,7 +28,7 @@ class TagTextFieldTest {
                 value = tagText,
                 onTagChange = {
                     tagText = it
-                    isTagErrorMessage = validateTag(it)
+                    isTagErrorMessage = validateTagInput(it)
                     isTagError = isTagErrorMessage != null
                 },
                 errorMessage = isTagErrorMessage,
@@ -54,7 +54,7 @@ class TagTextFieldTest {
                 value = tagText,
                 onTagChange = {
                     tagText = it
-                    isTagErrorMessage = validateTag(it)
+                    isTagErrorMessage = validateTagInput(it)
                     isTagError = isTagErrorMessage != null
                 },
                 errorMessage = isTagErrorMessage,
@@ -81,7 +81,7 @@ class TagTextFieldTest {
                 value = tagText,
                 onTagChange = {
                     tagText = it
-                    isTagErrorMessage = validateTag(it)
+                    isTagErrorMessage = validateTagInput(it)
                     isTagError = isTagErrorMessage != null
                 },
                 errorMessage = isTagErrorMessage,

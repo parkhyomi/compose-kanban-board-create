@@ -1,4 +1,4 @@
-package woowacourse.kanban.board.ui
+package woowacourse.kanban.board.ui.card
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -29,7 +29,7 @@ import woowacourse.kanban.board.ui.theme.Gray400
 private const val UNKNOWN_USER = "알 수 없는 유저"
 
 @Composable
-fun UserProfile(user: User?, modifier: Modifier = Modifier) {
+fun CardUserProfile(user: User?, modifier: Modifier = Modifier) {
     Row(
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -61,6 +61,6 @@ fun UserProfile(user: User?, modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun UserPreView() {
-    UserProfile(User("다이노"))
+fun CardUserProfilePreview() {
+    CardUserProfile(User("다이노"))
 }

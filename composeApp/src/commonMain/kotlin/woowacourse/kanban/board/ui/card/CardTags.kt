@@ -1,6 +1,8 @@
-package woowacourse.kanban.board.ui
+package woowacourse.kanban.board.ui.card
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
@@ -12,11 +14,26 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import woowacourse.kanban.board.model.Tag
 import woowacourse.kanban.board.ui.theme.Gray100
 import woowacourse.kanban.board.ui.theme.Gray700
+import kotlin.collections.forEach
 
 @Composable
-fun Chip(content: String, modifier: Modifier = Modifier, textColor: Color = Gray700, backgroundColor: Color = Gray100) {
+fun CardTags(tags: List<Tag>) {
+    FlowRow(
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(4.dp),
+    ) {
+        tags.forEach { tag ->
+            Chip(tag.content)
+        }
+    }
+}
+
+
+@Composable
+private fun Chip(content: String, modifier: Modifier = Modifier, textColor: Color = Gray700, backgroundColor: Color = Gray100) {
     Text(
         text = content,
         fontSize = 12.sp,

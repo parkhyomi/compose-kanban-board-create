@@ -2,8 +2,6 @@ package woowacourse.kanban.board.ui.create
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.HorizontalDivider
@@ -48,7 +46,7 @@ fun KanbanCreateDialogContent(
     Column(
         modifier = modifier
     ) {
-        Header(
+        KanbanCreateHeader(
             onDismiss = onDismiss
         )
         HorizontalDivider()
@@ -82,7 +80,7 @@ fun KanbanCreateDialogContent(
                     value = tag,
                     onTagChange = {
                         tag = it
-                        isTagErrorMessage = validateTag(it)
+                        isTagErrorMessage = validateTagInput(it)
                         isTagError = isTagErrorMessage != null
                     },
                     errorMessage = isTagErrorMessage,
@@ -110,7 +108,7 @@ fun KanbanCreateDialogContent(
             }
         }
         HorizontalDivider()
-        Footer(
+        KanbanCreateFooter(
             onClickCancel = onDismiss,
             onClickConfirm = {
                 // 나중 기능 추가
@@ -120,7 +118,7 @@ fun KanbanCreateDialogContent(
     }
 }
 
-fun validateTag(tag: String): String? {
+fun validateTagInput(tag: String): String? {
     val formatted = tag.split(",").map { it.trim() }
     if (formatted.any { it.isBlank() }) return "태그 형식이 올바르지 않습니다."
     if (formatted.any { it.length > 5 } || formatted.size > 5) return "태그는 5자 이내로 5개까지만 등록할 수 있습니다"

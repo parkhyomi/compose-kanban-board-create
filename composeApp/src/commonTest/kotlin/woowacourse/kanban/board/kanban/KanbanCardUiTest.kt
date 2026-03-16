@@ -8,7 +8,7 @@ import kotlin.test.Test
 import woowacourse.kanban.board.model.Card
 import woowacourse.kanban.board.model.Tag
 import woowacourse.kanban.board.model.User
-import woowacourse.kanban.board.ui.KanbanCard
+import woowacourse.kanban.board.ui.card.KanbanCard
 
 @OptIn(ExperimentalTestApi::class)
 class KanbanCardUiTest {

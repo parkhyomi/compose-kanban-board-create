@@ -21,7 +21,6 @@ import androidx.compose.ui.unit.dp
 import woowacourse.kanban.board.model.Status
 import woowacourse.kanban.board.ui.component.Label
 
-
 @Composable
 fun StatusSelector(
     modifier: Modifier = Modifier,
@@ -38,7 +37,7 @@ fun StatusSelector(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             Status.entries.forEach { status ->
-                StatusChip(
+                StatusSelectorChip(
                     status = status,
                     selectedStatus = selectedStatus,
                     onStatusChange = onStatusChange,
@@ -50,7 +49,7 @@ fun StatusSelector(
 }
 
 @Composable
-fun StatusChip(
+fun StatusSelectorChip(
     modifier: Modifier = Modifier,
     status: Status,
     selectedStatus: Status,
@@ -99,7 +98,7 @@ private fun StatusPreview() {
 @Preview(showBackground = true)
 private fun StatusChipPreview() {
     var status by remember { mutableStateOf(Status.TODO) }
-    StatusChip(
+    StatusSelectorChip(
         selectedStatus = status,
         status = Status.TODO,
         onStatusChange = {
@@ -107,4 +106,3 @@ private fun StatusChipPreview() {
         },
     )
 }
-
