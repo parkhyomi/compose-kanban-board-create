@@ -1,9 +1,12 @@
 package woowacourse.kanban.board.ui.create
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -11,6 +14,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import woowacourse.kanban.board.model.Status
@@ -45,67 +49,69 @@ fun KanbanCreateDialogContent(
 
     Column(
         modifier = modifier
+            .background(Color.White),
     ) {
         KanbanCreateHeader(
-            onDismiss = onDismiss
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color.White)
+                .padding(horizontal = 24.dp, vertical = 28.dp),
+            onDismiss = onDismiss,
         )
+
         HorizontalDivider()
-        LazyColumn(
-            modifier = Modifier.padding(24.dp)
-                .weight(1f),
+
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .verticalScroll(rememberScrollState())
+                .padding(horizontal = 24.dp, vertical = 24.dp),
             verticalArrangement = Arrangement.spacedBy(24.dp),
         ) {
-            item {
-                TitleArea(
-                    value = title,
-                    onTitleChange = {
-                        title = it
-                        isTitleError = title.isBlank()
-                    },
-                    isError = isTitleError,
-                )
-            }
 
-            item {
-                ContentArea(
-                    value = content,
-                    onContentChange = {
-                        content = it
-                    },
-                )
-            }
+            TitleArea(
+                value = title,
+                onTitleChange = {
+                    title = it
+                    isTitleError = title.isBlank()
+                },
+                isError = isTitleError,
+            )
 
-            item {
-                TagArea(
-                    value = tag,
-                    onTagChange = {
-                        tag = it
-                        isTagErrorMessage = validateTagInput(it)
-                        isTagError = isTagErrorMessage != null
-                    },
-                    errorMessage = isTagErrorMessage,
-                    isError = isTagError,
-                )
-            }
 
-            item {
-                StatusSelector(
-                    selectedStatus = status,
-                    onStatusChange = {
-                        status = it
-                    },
-                )
-            }
+            ContentArea(
+                value = content,
+                onContentChange = {
+                    content = it
+                },
+            )
 
-            item {
-                ManagerSelector(
-                    managers = managers,
-                    selectedUser = selectedUser,
-                    onUserChange = {
-                        selectedUser = it
-                    },
-                )
-            }
+            TagArea(
+                value = tag,
+                onTagChange = {
+                    tag = it
+                    isTagErrorMessage = validateTagInput(it)
+                    isTagError = isTagErrorMessage != null
+                },
+                errorMessage = isTagErrorMessage,
+                isError = isTagError,
+            )
+
+            StatusSelector(
+                selectedStatus = status,
+                onStatusChange = {
+                    status = it
+                },
+            )
+
+            ManagerSelector(
+                managers = managers,
+                selectedUser = selectedUser,
+                onUserChange = {
+                    selectedUser = it
+                },
+            )
+
         }
         HorizontalDivider()
         KanbanCreateFooter(
@@ -113,7 +119,7 @@ fun KanbanCreateDialogContent(
             onClickConfirm = {
                 // 나중 기능 추가
             },
-            enabled = !isTitleError && title.isNotBlank() &&!isTagError,
+            enabled = !isTitleError && title.isNotBlank() && !isTagError,
         )
     }
 }

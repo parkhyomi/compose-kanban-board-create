@@ -29,7 +29,7 @@ fun ManagerSelector(
     onUserChange: (User) -> Unit,
 ) {
     Column(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(1f),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         Label("담당자", true)

@@ -28,12 +28,12 @@ fun StatusSelector(
     onStatusChange: (Status) -> Unit,
 ) {
     Column(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(1f),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         Label("상태", true)
         Row(
-            modifier = modifier,
+            modifier = Modifier.fillMaxWidth(1f),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             Status.entries.forEach { status ->

@@ -23,7 +23,7 @@ fun ContentArea(
     onContentChange: (String) -> Unit,
 ) {
     Column(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(1f),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         Label("설명")
@@ -32,7 +32,7 @@ fun ContentArea(
             onValueChange =  {
                 onContentChange(it)
             },
-            modifier = modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(1f),
             placeholder = {
                 Text(
                     text = "태스크에 대한 자세한 설명을 입력하세요",
