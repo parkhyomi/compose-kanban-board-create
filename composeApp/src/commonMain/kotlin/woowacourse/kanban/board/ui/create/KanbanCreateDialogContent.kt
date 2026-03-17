@@ -30,11 +30,6 @@ fun KanbanCreateDialogContent(
     modifier: Modifier = Modifier,
     onDismiss: () -> Unit,
 ) {
-    val managers = listOf(
-        User("디노"),
-        User("제임스"),
-    )
-
     var title by remember { mutableStateOf("") }
     var isTitleError by remember { mutableStateOf(false) }
 
@@ -45,7 +40,8 @@ fun KanbanCreateDialogContent(
     var isTagErrorMessage: String? by remember { mutableStateOf(null) }
 
     var status by remember { mutableStateOf(Status.TODO) }
-    var selectedUser by remember { mutableStateOf(managers.first()) }
+    
+    var selectedUser by remember { mutableStateOf(User.managersList.first()) }
 
     Column(
         modifier = modifier
@@ -105,7 +101,7 @@ fun KanbanCreateDialogContent(
             )
 
             ManagerSelector(
-                managers = managers,
+                managers = User.managersList,
                 selectedUser = selectedUser,
                 onUserChange = {
                     selectedUser = it

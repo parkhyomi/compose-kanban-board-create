@@ -9,4 +9,11 @@ data class User(
             "이름은 공백일 수 없습니다."
         }
     }
+
+    companion object {
+        val managersList = listOf(
+            User("디노"),
+            User("제임스")
+        )
+    }
 }
