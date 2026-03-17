@@ -19,7 +19,10 @@ import woowacourse.kanban.board.ui.theme.Gray100
 import woowacourse.kanban.board.ui.theme.Gray200
 
 @Composable
-fun KanbanCard(card: Card, modifier: Modifier = Modifier) {
+fun KanbanCard(
+    card: Card,
+    modifier: Modifier = Modifier,
+) {
     Column(
         modifier = modifier
             .clip(shape = RoundedCornerShape(10.dp))
@@ -30,7 +33,9 @@ fun KanbanCard(card: Card, modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         CardTitle(card.title)
-        card.content?.let { content -> CardContent(content) }
+        card.content?.let {
+            content -> CardContent(content)
+        }
         if (card.tags.isNotEmpty()) CardTags(card.tags)
         Box {
             HorizontalDivider(color = Gray100, thickness = 1.dp)

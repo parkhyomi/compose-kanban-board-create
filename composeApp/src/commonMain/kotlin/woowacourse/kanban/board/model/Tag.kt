@@ -1,7 +1,9 @@
 package woowacourse.kanban.board.model
 
 @JvmInline
-value class Tag(val content: String) {
+value class Tag(
+    val content: String
+) {
     init {
         require(content.length in MIN_TAG_LENGTH..MAX_TAG_LENGTH) { "최대 $MAX_TAG_LENGTH 글자까지 입력 가능합니다." }
     }

@@ -20,20 +20,27 @@ import woowacourse.kanban.board.ui.theme.Gray700
 import kotlin.collections.forEach
 
 @Composable
-fun CardTags(tags: List<Tag>) {
+fun CardTags(
+    tags: List<Tag>,
+) {
     FlowRow(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
         tags.forEach { tag ->
-            Chip(tag.content)
+            Chip(content = tag.content)
         }
     }
 }
 
 
 @Composable
-private fun Chip(content: String, modifier: Modifier = Modifier, textColor: Color = Gray700, backgroundColor: Color = Gray100) {
+private fun Chip(
+    modifier: Modifier = Modifier,
+    content: String,
+    textColor: Color = Gray700,
+    backgroundColor: Color = Gray100,
+) {
     Text(
         text = content,
         fontSize = 12.sp,
@@ -49,5 +56,5 @@ private fun Chip(content: String, modifier: Modifier = Modifier, textColor: Colo
 @Preview
 @Composable
 fun ChipPreview() {
-    Chip("칩입니다")
+    Chip(content = "칩입니다")
 }
