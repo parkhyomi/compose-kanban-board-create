@@ -62,7 +62,7 @@ fun StatusSelectorChip(
         },
         label = {
             Text(
-                status.label,
+                text = status.toDisplayText(),
                 modifier = Modifier.fillMaxWidth()
                     .padding(vertical = 14.dp),
                 textAlign = TextAlign.Center,
@@ -85,6 +85,12 @@ fun StatusSelectorChip(
     )
 }
 
+fun Status.toDisplayText(): String = when (this) {
+    Status.TODO -> "To Do"
+    Status.IN_PROGRESS -> "In Progress"
+    Status.DONE -> "Done"
+}
+
 @Composable
 @Preview(showBackground = true)
 private fun StatusPreview() {
@@ -101,8 +107,6 @@ private fun StatusChipPreview() {
     StatusSelectorChip(
         selectedStatus = status,
         status = Status.TODO,
-        onStatusChange = {
-            status = it
-        },
+        onStatusChange = {},
     )
 }
