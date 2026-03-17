@@ -63,4 +63,30 @@ class KanbanCreateFooterTest {
             .assertIsNotEnabled()
     }
 
+    @Test
+    fun `제목 입력 후 태그 오류를 수정하면 생성 버튼이 다시 활성화된다`() = runComposeUiTest {
+        setContent {
+            KanbanCreateDialogContent(
+                onDismiss = {},
+            )
+        }
+
+        val textFields = onAllNodes(hasSetTextAction())
+
+        textFields[0].performTextInput("할 일")
+        textFields[2].performTextInput("우아한테크코스")
+
+        onNodeWithText("태그는 5자 이내로 5개까지만 등록할 수 있습니다", useUnmergedTree = true)
+            .assertExists()
+        onNodeWithText("생성")
+            .assertIsNotEnabled()
+
+        textFields[2].performTextClearance()
+        textFields[2].performTextInput("버그,긴급")
+
+        onNodeWithText("태그는 5자 이내로 5개까지만 등록할 수 있습니다", useUnmergedTree = true)
+            .assertDoesNotExist()
+        onNodeWithText("생성")
+            .assertIsEnabled()
+    }
 }
