@@ -9,87 +9,62 @@ import androidx.compose.ui.test.hasSetTextAction
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.runComposeUiTest
-import org.junit.Test
-import woowacourse.kanban.board.ui.create.validateTagInput
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 @OptIn(ExperimentalTestApi::class)
 class TagTextFieldTest {
 
     @Test
-    fun `글과 글 사이는 쉼표로 구분되고 공백이 있을 경우 에러 문구가 표시된다`() = runComposeUiTest {
+    fun `에러 상태가 주어지면 에러 문구가 표시된다`() = runComposeUiTest {
         setContent {
-            var tagText by remember { mutableStateOf("") }
-            var isTagError by remember { mutableStateOf(false) }
-
-            var isTagErrorMessage: String? by remember { mutableStateOf(null) }
-
             TagArea(
-                value = tagText,
-                onTagChange = {
-                    tagText = it
-                    isTagErrorMessage = validateTagInput(it)
-                    isTagError = isTagErrorMessage != null
-                },
-                errorMessage = isTagErrorMessage,
-                isError = isTagError,
+                value = "버그,",
+                onTagChange = {},
+                errorMessage = "태그 형식이 올바르지 않습니다.",
+                isError = true,
             )
         }
-
-        onNode(hasSetTextAction()).performTextInput(",,,,,,")
 
         onNodeWithText("태그 형식이 올바르지 않습니다.", useUnmergedTree = true)
             .assertExists()
     }
 
     @Test
-    fun `쉼표로 구분된 문자열이 5자 초과일 경우 에러 문구가 표시된다`() = runComposeUiTest {
+    fun `정상 상태가 주어지면 안내 문구가 표시된다`() = runComposeUiTest {
         setContent {
-            var tagText by remember { mutableStateOf("") }
-            var isTagError by remember { mutableStateOf(false) }
-
-            var isTagErrorMessage: String? by remember { mutableStateOf(null) }
-
             TagArea(
-                value = tagText,
-                onTagChange = {
-                    tagText = it
-                    isTagErrorMessage = validateTagInput(it)
-                    isTagError = isTagErrorMessage != null
-                },
-                errorMessage = isTagErrorMessage,
-                isError = isTagError,
+                value = "버그, 긴급",
+                onTagChange = {},
+                errorMessage = null,
+                isError = false,
             )
         }
 
-        onNode(hasSetTextAction()).performTextInput("우아한테크코스")
-
-        onNodeWithText("태그는 5자 이내로 5개까지만 등록할 수 있습니다", useUnmergedTree = true)
+        onNodeWithText("5자 이내의 태그를 최대 5개까지 등록할 수 있습니다.", useUnmergedTree = true)
             .assertExists()
     }
 
     @Test
-    fun `쉼표로 구분된 개수가 5개 초과일 경우 에러 문구가 표시된다`() = runComposeUiTest {
+    fun `입력값은 onTagChange로 전달된다`() = runComposeUiTest {
+        var latestInput = ""
+
         setContent {
             var tagText by remember { mutableStateOf("") }
-            var isTagError by remember { mutableStateOf(false) }
-
-            var isTagErrorMessage: String? by remember { mutableStateOf(null) }
 
             TagArea(
                 value = tagText,
                 onTagChange = {
                     tagText = it
-                    isTagErrorMessage = validateTagInput(it)
-                    isTagError = isTagErrorMessage != null
+                    latestInput = it
                 },
-                errorMessage = isTagErrorMessage,
-                isError = isTagError,
+                errorMessage = null,
+                isError = false,
             )
         }
 
-        onNode(hasSetTextAction()).performTextInput("우아한,테크,메가커피,아이폰,컴포즈,하이하이")
+        onAllNodes(hasSetTextAction())[0].performTextInput("버그, 긴급")
 
-        onNodeWithText("태그는 5자 이내로 5개까지만 등록할 수 있습니다", useUnmergedTree = true)
-            .assertExists()
+        assertEquals("버그, 긴급", latestInput)
     }
 }
