@@ -21,13 +21,14 @@ import woowacourse.kanban.board.domain.model.User
 import woowacourse.kanban.board.ui.card.CardUserProfile
 import woowacourse.kanban.board.ui.component.Label
 
+const val MANAGER_LABEL = "담당자"
 @Composable
 fun ManagerSelector(modifier: Modifier = Modifier, managers: List<User>, selectedUser: User, onUserChange: (User) -> Unit) {
     Column(
         modifier = modifier.fillMaxWidth(1f),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        Label("담당자", true)
+        Label(MANAGER_LABEL, true)
         managers.chunked(3).forEach { users ->
             Row(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),

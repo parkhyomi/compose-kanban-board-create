@@ -19,7 +19,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import woowacourse.kanban.board.domain.model.Status
+import woowacourse.kanban.board.domain.validator.validateStatus
 import woowacourse.kanban.board.ui.component.Label
+
+private const val CONTENT_LABEL = "상태"
 
 @Composable
 fun StatusSelector(modifier: Modifier = Modifier, selectedStatus: Status = Status.TODO, onStatusChange: (Status) -> Unit) {
@@ -27,7 +30,7 @@ fun StatusSelector(modifier: Modifier = Modifier, selectedStatus: Status = Statu
         modifier = modifier.fillMaxWidth(1f),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        Label("상태", true)
+        Label(CONTENT_LABEL, true)
         Row(
             modifier = Modifier.fillMaxWidth(1f),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -53,7 +56,7 @@ fun StatusSelectorChip(modifier: Modifier = Modifier, status: Status, selectedSt
         },
         label = {
             Text(
-                text = status.toDisplayText(),
+                text = validateStatus(status),
                 modifier = Modifier.fillMaxWidth()
                     .padding(vertical = 14.dp),
                 textAlign = TextAlign.Center,
@@ -74,12 +77,6 @@ fun StatusSelectorChip(modifier: Modifier = Modifier, status: Status, selectedSt
             selectedBorderWidth = 1.dp,
         ),
     )
-}
-
-fun Status.toDisplayText(): String = when (this) {
-    Status.TODO -> "To Do"
-    Status.IN_PROGRESS -> "In Progress"
-    Status.DONE -> "Done"
 }
 
 @Composable

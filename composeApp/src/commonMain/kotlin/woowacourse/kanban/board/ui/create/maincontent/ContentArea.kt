@@ -16,13 +16,16 @@ import woowacourse.kanban.board.ui.theme.Gray
 import woowacourse.kanban.board.ui.theme.Gray500
 import woowacourse.kanban.board.ui.theme.Red
 
+private const val TITLE_LABEL = "설명"
+private const val TITLE_LABEL_PLACEHOLDER = "태스크에 대한 자세한 설명을 입력하세요"
+
 @Composable
 fun ContentArea(modifier: Modifier = Modifier, value: String, onContentChange: (String) -> Unit) {
     Column(
         modifier = modifier.fillMaxWidth(1f),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        Label("설명")
+        Label(TITLE_LABEL)
         OutlinedTextField(
             value = value,
             onValueChange = {
@@ -31,7 +34,7 @@ fun ContentArea(modifier: Modifier = Modifier, value: String, onContentChange: (
             modifier = Modifier.fillMaxWidth(1f),
             placeholder = {
                 Text(
-                    text = "태스크에 대한 자세한 설명을 입력하세요",
+                    text = TITLE_LABEL_PLACEHOLDER,
                     color = Gray,
                 )
             },

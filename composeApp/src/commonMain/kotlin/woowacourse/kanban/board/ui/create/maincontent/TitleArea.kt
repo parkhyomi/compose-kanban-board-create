@@ -14,6 +14,10 @@ import androidx.compose.ui.unit.dp
 import woowacourse.kanban.board.ui.component.Label
 import woowacourse.kanban.board.ui.component.SingleLineTextField
 
+private const val TITLE_LABEL = "제목"
+private const val TITLE_LABEL_PLACEHOLDER = "태스크 제목을 입력하세요."
+private const val TITLE_ERROR_MESSAGE = "제목을 입력해주세요."
+
 @Composable
 fun TitleArea(modifier: Modifier = Modifier, value: String, onTitleChange: (String) -> Unit, isError: Boolean = false) {
     Column(
@@ -21,7 +25,7 @@ fun TitleArea(modifier: Modifier = Modifier, value: String, onTitleChange: (Stri
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         Label(
-            "제목",
+            TITLE_LABEL,
             true,
         )
         SingleLineTextField(
@@ -29,8 +33,8 @@ fun TitleArea(modifier: Modifier = Modifier, value: String, onTitleChange: (Stri
             value = value,
             onValueChange = onTitleChange,
             isError = isError,
-            errorMessage = "제목을 입력해주세요.",
-            placeHolderMessage = "태스크 제목을 입력하세요.",
+            errorMessage = TITLE_ERROR_MESSAGE,
+            placeHolderMessage = TITLE_LABEL_PLACEHOLDER,
         )
     }
 }
@@ -41,6 +45,6 @@ private fun TitlePreview() {
     var title by remember { mutableStateOf("") }
     TitleArea(
         value = title,
-        onTitleChange = { title = it },
+        onTitleChange = { },
     )
 }

@@ -17,6 +17,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 
+const val HEAD_TEXT = "새 태스크 생성"
+
 @Composable
 fun KanbanCreateHeader(modifier: Modifier = Modifier, onDismiss: () -> Unit) {
     Row(
@@ -26,7 +28,7 @@ fun KanbanCreateHeader(modifier: Modifier = Modifier, onDismiss: () -> Unit) {
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
-            text = "새 태스크 생성",
+            text = HEAD_TEXT,
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
         )
