@@ -1,4 +1,4 @@
-package woowacourse.kanban.board.model
+package woowacourse.kanban.board.domain.model
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
