@@ -1,7 +1,6 @@
 package woowacourse.kanban.board.ui.preview
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import woowacourse.kanban.board.domain.model.Card
