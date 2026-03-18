@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import woowacourse.kanban.board.domain.model.User
+import woowacourse.kanban.board.ui.preview.KanbanPreview
 import woowacourse.kanban.board.ui.theme.Gray400
 import woowacourse.kanban.board.ui.theme.Gray700
 
@@ -48,8 +49,9 @@ fun CardUserProfile(user: User?, modifier: Modifier = Modifier) {
     }
 }
 
-@Preview(showBackground = true)
+
 @Composable
+@KanbanPreview
 fun CardUserProfilePreview() {
     CardUserProfile(User("다이노"))
 }

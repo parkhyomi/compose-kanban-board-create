@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import woowacourse.kanban.board.ui.preview.KanbanPreview
 import woowacourse.kanban.board.ui.theme.Gray700
 
 @Composable
@@ -29,7 +30,7 @@ fun Label(label: String, required: Boolean = false) {
 }
 
 @Composable
-@Preview(showBackground = true)
+@KanbanPreview
 private fun LabelPreview() {
     Label("로미", true)
 }

@@ -25,6 +25,7 @@ import woowacourse.kanban.board.ui.create.maincontent.ManagerSelector
 import woowacourse.kanban.board.ui.create.maincontent.StatusSelector
 import woowacourse.kanban.board.ui.create.maincontent.TagArea
 import woowacourse.kanban.board.ui.create.maincontent.TitleArea
+import woowacourse.kanban.board.ui.preview.KanbanPreview
 
 @Composable
 fun KanbanCreateDialogContent(modifier: Modifier = Modifier, onDismiss: () -> Unit) {
@@ -117,7 +118,7 @@ fun KanbanCreateDialogContent(modifier: Modifier = Modifier, onDismiss: () -> Un
 }
 
 @Composable
-@Preview(showBackground = true)
+@KanbanPreview
 fun KanbanCreateDialogContentPreview() {
     KanbanCreateDialogContent(
         onDismiss = {},

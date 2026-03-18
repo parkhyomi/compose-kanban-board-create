@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import woowacourse.kanban.board.ui.preview.KanbanPreview
 import woowacourse.kanban.board.ui.theme.Gray
 import woowacourse.kanban.board.ui.theme.Gray500
 import woowacourse.kanban.board.ui.theme.Gray800
@@ -69,7 +70,7 @@ fun SingleLineTextField(
 }
 
 @Composable
-@Preview(showBackground = true)
+@KanbanPreview
 private fun SingleLineTextFieldPreview() {
     SingleLineTextField(
         placeHolderMessage = "제목을 입력해주세요.",

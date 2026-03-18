@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlin.collections.forEach
 import woowacourse.kanban.board.domain.model.Tag
+import woowacourse.kanban.board.ui.preview.KanbanPreview
 import woowacourse.kanban.board.ui.theme.Gray100
 import woowacourse.kanban.board.ui.theme.Gray700
 
@@ -45,8 +46,8 @@ private fun Chip(modifier: Modifier = Modifier, content: String, textColor: Colo
     )
 }
 
-@Preview
 @Composable
+@KanbanPreview
 fun ChipPreview() {
     Chip(content = "칩입니다")
 }

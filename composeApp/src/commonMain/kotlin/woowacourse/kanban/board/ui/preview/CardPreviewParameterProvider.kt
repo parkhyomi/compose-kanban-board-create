@@ -44,7 +44,7 @@ private class CardPreviewParameterProvider : PreviewParameterProvider<Card> {
 }
 
 @Composable
-@Preview
+@KanbanPreview
 private fun KanbanCardPreview(@PreviewParameter(CardPreviewParameterProvider::class) card: Card) {
     KanbanCard(card)
 }

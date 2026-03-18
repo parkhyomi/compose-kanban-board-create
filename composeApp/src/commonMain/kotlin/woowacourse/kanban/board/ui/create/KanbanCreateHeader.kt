@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import woowacourse.kanban.board.ui.preview.KanbanPreview
 
 const val HEAD_TEXT = "새 태스크 생성"
 
@@ -44,7 +45,7 @@ fun KanbanCreateHeader(modifier: Modifier = Modifier, onDismiss: () -> Unit) {
 }
 
 @Composable
-@Preview(showBackground = true)
+@KanbanPreview
 private fun HeaderPreview() {
     KanbanCreateHeader(
         onDismiss = {},

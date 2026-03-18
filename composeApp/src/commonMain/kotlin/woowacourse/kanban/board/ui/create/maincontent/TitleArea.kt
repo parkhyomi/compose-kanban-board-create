@@ -13,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import woowacourse.kanban.board.ui.component.Label
 import woowacourse.kanban.board.ui.component.SingleLineTextField
+import woowacourse.kanban.board.ui.preview.KanbanPreview
 
 private const val TITLE_LABEL = "제목"
 private const val TITLE_LABEL_PLACEHOLDER = "태스크 제목을 입력하세요."
@@ -40,7 +41,7 @@ fun TitleArea(modifier: Modifier = Modifier, value: String, onTitleChange: (Stri
 }
 
 @Composable
-@Preview(showBackground = true)
+@KanbanPreview
 private fun TitlePreview() {
     var title by remember { mutableStateOf("") }
     TitleArea(

@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import woowacourse.kanban.board.ui.component.Label
+import woowacourse.kanban.board.ui.preview.KanbanPreview
 import woowacourse.kanban.board.ui.theme.Gray
 import woowacourse.kanban.board.ui.theme.Gray500
 import woowacourse.kanban.board.ui.theme.Red
@@ -49,7 +50,7 @@ fun ContentArea(modifier: Modifier = Modifier, value: String, onContentChange: (
 }
 
 @Composable
-@Preview(showBackground = true)
+@KanbanPreview
 private fun ContentPreview() {
     ContentArea(
         value = "",

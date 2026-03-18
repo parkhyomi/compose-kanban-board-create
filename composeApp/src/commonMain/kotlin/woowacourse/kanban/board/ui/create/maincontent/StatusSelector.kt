@@ -20,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import woowacourse.kanban.board.domain.model.Status
 import woowacourse.kanban.board.ui.component.Label
+import woowacourse.kanban.board.ui.preview.KanbanPreview
 
 private const val CONTENT_LABEL = "상태"
 
@@ -79,7 +80,7 @@ fun StatusSelectorChip(modifier: Modifier = Modifier, status: Status, selectedSt
 }
 
 @Composable
-@Preview(showBackground = true)
+@KanbanPreview
 private fun StatusPreview() {
     StatusSelector(
         selectedStatus = Status.TODO,
@@ -88,7 +89,7 @@ private fun StatusPreview() {
 }
 
 @Composable
-@Preview(showBackground = true)
+@KanbanPreview
 private fun StatusChipPreview() {
     var status by remember { mutableStateOf(Status.TODO) }
     StatusSelectorChip(

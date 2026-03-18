@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import woowacourse.kanban.board.ui.preview.KanbanPreview
 import woowacourse.kanban.board.ui.theme.Blue
 import woowacourse.kanban.board.ui.theme.Gray300
 import woowacourse.kanban.board.ui.theme.Gray700
@@ -77,7 +78,7 @@ fun KanbanCreateConfirmButton(modifier: Modifier = Modifier, onClickConfirm: () 
 }
 
 @Composable
-@Preview(showBackground = true)
+@KanbanPreview
 private fun FooterPreview() {
     KanbanCreateFooter(
         onClickCancel = {},

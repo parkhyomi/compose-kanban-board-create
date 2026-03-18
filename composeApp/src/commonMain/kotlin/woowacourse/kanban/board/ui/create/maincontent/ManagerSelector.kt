@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import woowacourse.kanban.board.domain.model.User
 import woowacourse.kanban.board.ui.card.CardUserProfile
 import woowacourse.kanban.board.ui.component.Label
+import woowacourse.kanban.board.ui.preview.KanbanPreview
 
 const val MANAGER_LABEL = "담당자"
 @Composable
@@ -75,7 +76,7 @@ fun ManagerSelectorChip(managers: User, selectedUser: Boolean, onUserChange: () 
 }
 
 @Composable
-@Preview(showBackground = true)
+@KanbanPreview
 private fun ManagerPreview() {
     var selectedUser by remember { mutableStateOf(User("디노")) }
 
@@ -95,7 +96,7 @@ private fun ManagerPreview() {
 }
 
 @Composable
-@Preview(showBackground = true)
+@KanbanPreview
 private fun ManagerChipPreview() {
     ManagerSelectorChip(
         managers = User("김철수"),

@@ -1,8 +1,8 @@
 package woowacourse.kanban.board.ui.create
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.window.Dialog
+import woowacourse.kanban.board.ui.preview.KanbanPreview
 
 @Composable
 fun KanbanCreateDialog(onDismissRequest: () -> Unit) {
@@ -17,7 +17,7 @@ fun KanbanCreateDialog(onDismissRequest: () -> Unit) {
 }
 
 @Composable
-@Preview(showBackground = true)
+@KanbanPreview
 private fun KanbanDialogPreview() {
     KanbanCreateDialog(
         onDismissRequest = {},

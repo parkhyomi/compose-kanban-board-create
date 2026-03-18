@@ -9,6 +9,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import woowacourse.kanban.board.ui.component.Label
 import woowacourse.kanban.board.ui.component.SingleLineTextField
+import woowacourse.kanban.board.ui.preview.KanbanPreview
 
 private const val CONTENT_LABEL = "태그"
 private const val TAG_LABEL_PLACEHOLDER = "태그를 쉼표로 구분하여 입력하세요 (예: 버그,긴급)"
@@ -40,7 +41,7 @@ fun TagArea(
 }
 
 @Composable
-@Preview(showBackground = true)
+@KanbanPreview
 private fun TagPreview() {
     TagArea(
         value = "",
