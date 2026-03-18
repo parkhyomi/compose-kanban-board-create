@@ -82,7 +82,7 @@ class KanbanCreateFooterTest {
             .assertIsNotEnabled()
 
         textFields[2].performTextClearance()
-        textFields[2].performTextInput("버그,긴급")
+        textFields[2].performTextInput("버그, 긴급")
 
         onNodeWithText("태그는 5자 이내로 5개까지만 등록할 수 있습니다", useUnmergedTree = true)
             .assertDoesNotExist()
