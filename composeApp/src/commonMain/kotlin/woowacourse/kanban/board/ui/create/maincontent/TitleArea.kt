@@ -15,12 +15,7 @@ import woowacourse.kanban.board.ui.component.Label
 import woowacourse.kanban.board.ui.component.SingleLineTextField
 
 @Composable
-fun TitleArea(
-    modifier: Modifier = Modifier,
-    value: String,
-    onTitleChange: (String) -> Unit,
-    isError: Boolean = false,
-) {
+fun TitleArea(modifier: Modifier = Modifier, value: String, onTitleChange: (String) -> Unit, isError: Boolean = false) {
     Column(
         modifier = modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(8.dp),

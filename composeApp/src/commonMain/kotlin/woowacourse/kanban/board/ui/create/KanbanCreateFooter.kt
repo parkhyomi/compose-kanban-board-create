@@ -20,12 +20,7 @@ import woowacourse.kanban.board.ui.theme.Gray300
 import woowacourse.kanban.board.ui.theme.Gray700
 
 @Composable
-fun KanbanCreateFooter(
-    modifier: Modifier = Modifier,
-    onClickCancel: () -> Unit,
-    onClickConfirm: () -> Unit,
-    enabled: Boolean = true,
-) {
+fun KanbanCreateFooter(modifier: Modifier = Modifier, onClickCancel: () -> Unit, onClickConfirm: () -> Unit, enabled: Boolean = true) {
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -35,40 +30,32 @@ fun KanbanCreateFooter(
         KanbanCreateCancelButton(onClickCancel = onClickCancel)
         KanbanCreateConfirmButton(
             onClickConfirm = onClickConfirm,
-            enabled = enabled
+            enabled = enabled,
         )
     }
 }
 
 @Composable
-fun KanbanCreateCancelButton(
-    modifier: Modifier = Modifier,
-    onClickCancel: () -> Unit,
-    enabled: Boolean = true,
-) {
+fun KanbanCreateCancelButton(modifier: Modifier = Modifier, onClickCancel: () -> Unit, enabled: Boolean = true) {
     Button(
         onClick = {
             onClickCancel()
         },
         enabled = enabled,
         colors = ButtonDefaults.buttonColors(
-            containerColor = Color.Transparent
+            containerColor = Color.Transparent,
         ),
-        contentPadding = PaddingValues(horizontal = 18.dp, vertical = 10.dp)
+        contentPadding = PaddingValues(horizontal = 18.dp, vertical = 10.dp),
     ) {
         Text(
             text = "취소",
-            color = Gray700
+            color = Gray700,
         )
     }
 }
 
 @Composable
-fun KanbanCreateConfirmButton(
-    modifier: Modifier = Modifier,
-    onClickConfirm: () -> Unit,
-    enabled: Boolean = true,
-) {
+fun KanbanCreateConfirmButton(modifier: Modifier = Modifier, onClickConfirm: () -> Unit, enabled: Boolean = true) {
     Button(
         onClick = {
             onClickConfirm()
@@ -79,9 +66,9 @@ fun KanbanCreateConfirmButton(
             containerColor = Blue,
             contentColor = Color.White,
             disabledContainerColor = Gray300,
-            disabledContentColor = Color.White
+            disabledContentColor = Color.White,
         ),
-        contentPadding = PaddingValues(horizontal = 18.dp, vertical = 10.dp)
+        contentPadding = PaddingValues(horizontal = 18.dp, vertical = 10.dp),
     ) {
         Text(
             text = "생성",

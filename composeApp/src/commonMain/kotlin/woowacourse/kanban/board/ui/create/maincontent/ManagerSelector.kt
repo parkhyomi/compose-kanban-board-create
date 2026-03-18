@@ -17,25 +17,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import woowacourse.kanban.board.model.User
+import woowacourse.kanban.board.domain.model.User
 import woowacourse.kanban.board.ui.card.CardUserProfile
 import woowacourse.kanban.board.ui.component.Label
 
 @Composable
-fun ManagerSelector(
-    modifier: Modifier = Modifier,
-    managers: List<User>,
-    selectedUser: User,
-    onUserChange: (User) -> Unit,
-) {
+fun ManagerSelector(modifier: Modifier = Modifier, managers: List<User>, selectedUser: User, onUserChange: (User) -> Unit) {
     Column(
         modifier = modifier.fillMaxWidth(1f),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         Label("담당자", true)
-        managers.chunked(3).forEach { users->
+        managers.chunked(3).forEach { users ->
             Row(
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 users.forEach { manager ->
                     ManagerSelectorChip(
@@ -45,8 +40,8 @@ fun ManagerSelector(
                         modifier = Modifier.weight(1f),
                     )
                 }
-                repeat(3-users.size){
-                    Spacer(modifier= Modifier.weight(1f))
+                repeat(3 - users.size) {
+                    Spacer(modifier = Modifier.weight(1f))
                 }
             }
         }
@@ -54,12 +49,7 @@ fun ManagerSelector(
 }
 
 @Composable
-fun ManagerSelectorChip(
-    managers: User,
-    selectedUser: Boolean,
-    onUserChange: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
+fun ManagerSelectorChip(managers: User, selectedUser: Boolean, onUserChange: () -> Unit, modifier: Modifier = Modifier) {
     FilterChip(
         selected = selectedUser,
         onClick = onUserChange,
@@ -93,7 +83,7 @@ private fun ManagerPreview() {
         User("제임스"),
         User("로미"),
         User("로미"),
-        User("로미")
+        User("로미"),
     )
 
     ManagerSelector(

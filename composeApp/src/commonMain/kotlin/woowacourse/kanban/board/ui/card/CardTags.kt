@@ -14,15 +14,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import woowacourse.kanban.board.model.Tag
+import kotlin.collections.forEach
+import woowacourse.kanban.board.domain.model.Tag
 import woowacourse.kanban.board.ui.theme.Gray100
 import woowacourse.kanban.board.ui.theme.Gray700
-import kotlin.collections.forEach
 
 @Composable
-fun CardTags(
-    tags: List<Tag>,
-) {
+fun CardTags(tags: List<Tag>) {
     FlowRow(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp),
@@ -33,14 +31,8 @@ fun CardTags(
     }
 }
 
-
 @Composable
-private fun Chip(
-    modifier: Modifier = Modifier,
-    content: String,
-    textColor: Color = Gray700,
-    backgroundColor: Color = Gray100,
-) {
+private fun Chip(modifier: Modifier = Modifier, content: String, textColor: Color = Gray700, backgroundColor: Color = Gray100) {
     Text(
         text = content,
         fontSize = 12.sp,

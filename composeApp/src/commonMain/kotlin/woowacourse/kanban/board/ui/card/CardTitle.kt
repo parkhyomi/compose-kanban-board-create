@@ -11,9 +11,7 @@ private const val DEFAULT_TITLE = "제목 없음"
 private const val TITLE_MAX_LINE = 1
 
 @Composable
-fun CardTitle(
-    title: String?,
-) {
+fun CardTitle(title: String?) {
     Text(
         text = if (title.isNullOrBlank()) DEFAULT_TITLE else title,
         fontSize = 16.sp,

@@ -3,6 +3,7 @@ package woowacourse.kanban.board.model
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFails
+import woowacourse.kanban.board.domain.model.Tag
 class TagTest {
     @Test
     fun `태그 글자 수가 5자 초과이면 예외`() {

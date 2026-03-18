@@ -4,9 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import woowacourse.kanban.board.model.Card
-import woowacourse.kanban.board.model.Tag
-import woowacourse.kanban.board.model.User
+import woowacourse.kanban.board.domain.model.Card
+import woowacourse.kanban.board.domain.model.Tag
+import woowacourse.kanban.board.domain.model.User
 import woowacourse.kanban.board.ui.card.KanbanCard
 
 private class CardPreviewParameterProvider : PreviewParameterProvider<Card> {

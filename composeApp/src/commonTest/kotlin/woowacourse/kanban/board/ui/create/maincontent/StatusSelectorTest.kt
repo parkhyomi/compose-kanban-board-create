@@ -5,13 +5,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.test.ExperimentalTestApi
-import androidx.compose.ui.test.assertIsSelected
 import androidx.compose.ui.test.assertIsNotSelected
+import androidx.compose.ui.test.assertIsSelected
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.runComposeUiTest
 import kotlin.test.Test
-import woowacourse.kanban.board.model.Status
+import woowacourse.kanban.board.domain.model.Status
 
 @OptIn(ExperimentalTestApi::class)
 class StatusSelectorTest {
@@ -19,7 +19,7 @@ class StatusSelectorTest {
     @Test
     fun `상태를 변경하면 선택 UI가 함께 변경된다`() = runComposeUiTest {
         setContent {
-            var selectedStatus by remember {mutableStateOf(Status.TODO)}
+            var selectedStatus by remember { mutableStateOf(Status.TODO) }
 
             StatusSelector(
                 selectedStatus = selectedStatus,

@@ -3,6 +3,7 @@ package woowacourse.kanban.board.model
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFails
+import woowacourse.kanban.board.domain.model.User
 class UserTest {
     @Test
     fun `유저 이름이 빈 값이면 예외`() {

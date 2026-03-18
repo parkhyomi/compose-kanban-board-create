@@ -5,9 +5,9 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.runComposeUiTest
 import kotlin.test.Test
-import woowacourse.kanban.board.model.Card
-import woowacourse.kanban.board.model.Tag
-import woowacourse.kanban.board.model.User
+import woowacourse.kanban.board.domain.model.Card
+import woowacourse.kanban.board.domain.model.Tag
+import woowacourse.kanban.board.domain.model.User
 @OptIn(ExperimentalTestApi::class)
 class KanbanCardUiTest {
     @Test

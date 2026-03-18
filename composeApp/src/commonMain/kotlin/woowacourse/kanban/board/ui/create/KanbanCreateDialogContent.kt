@@ -17,8 +17,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import woowacourse.kanban.board.model.Status
-import woowacourse.kanban.board.model.User
+import woowacourse.kanban.board.domain.model.Status
+import woowacourse.kanban.board.domain.model.User
+import woowacourse.kanban.board.domain.validator.validateTagInput
 import woowacourse.kanban.board.ui.create.maincontent.ContentArea
 import woowacourse.kanban.board.ui.create.maincontent.ManagerSelector
 import woowacourse.kanban.board.ui.create.maincontent.StatusSelector
@@ -26,10 +27,7 @@ import woowacourse.kanban.board.ui.create.maincontent.TagArea
 import woowacourse.kanban.board.ui.create.maincontent.TitleArea
 
 @Composable
-fun KanbanCreateDialogContent(
-    modifier: Modifier = Modifier,
-    onDismiss: () -> Unit,
-) {
+fun KanbanCreateDialogContent(modifier: Modifier = Modifier, onDismiss: () -> Unit) {
     var title by remember { mutableStateOf("") }
     var isTitleError by remember { mutableStateOf(false) }
 
@@ -40,7 +38,7 @@ fun KanbanCreateDialogContent(
     var isTagErrorMessage: String? by remember { mutableStateOf(null) }
 
     var status by remember { mutableStateOf(Status.TODO) }
-    
+
     var selectedUser by remember { mutableStateOf(User.managersList.first()) }
 
     Column(
@@ -74,7 +72,6 @@ fun KanbanCreateDialogContent(
                 isError = isTitleError,
             )
 
-
             ContentArea(
                 value = content,
                 onContentChange = {
@@ -107,7 +104,6 @@ fun KanbanCreateDialogContent(
                     selectedUser = it
                 },
             )
-
         }
         HorizontalDivider()
         KanbanCreateFooter(
@@ -119,14 +115,6 @@ fun KanbanCreateDialogContent(
         )
     }
 }
-
-fun validateTagInput(tag: String): String? {
-    val formatted = tag.split(",").map { it.trim() }
-    if (formatted.any { it.isBlank() }) return "태그 형식이 올바르지 않습니다."
-    if (formatted.any { it.length > 5 } || formatted.size > 5) return "태그는 5자 이내로 5개까지만 등록할 수 있습니다"
-    return null
-}
-
 
 @Composable
 @Preview(showBackground = true)

@@ -17,14 +17,14 @@ fun App() {
     var showDialog by remember { mutableStateOf(false) }
 
     MaterialTheme {
-        if(showDialog){
+        if (showDialog) {
             KanbanCreateDialogContent(
-                onDismiss = { showDialog = false }
+                onDismiss = { showDialog = false },
             )
-        }else{
+        } else {
             Button(
                 onClick = { showDialog = true },
-                content = { Text("Show dialog") }
+                content = { Text("Show dialog") },
             )
         }
     }

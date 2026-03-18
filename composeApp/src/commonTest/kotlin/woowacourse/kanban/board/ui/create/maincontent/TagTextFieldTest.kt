@@ -67,7 +67,6 @@ class TagTextFieldTest {
             .assertExists()
     }
 
-
     @Test
     fun `쉼표로 구분된 개수가 5개 초과일 경우 에러 문구가 표시된다`() = runComposeUiTest {
         setContent {
@@ -93,5 +92,4 @@ class TagTextFieldTest {
         onNodeWithText("태그는 5자 이내로 5개까지만 등록할 수 있습니다", useUnmergedTree = true)
             .assertExists()
     }
-
 }

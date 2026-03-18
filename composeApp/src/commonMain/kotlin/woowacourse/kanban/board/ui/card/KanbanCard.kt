@@ -14,15 +14,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import woowacourse.kanban.board.model.Card
+import woowacourse.kanban.board.domain.model.Card
 import woowacourse.kanban.board.ui.theme.Gray100
 import woowacourse.kanban.board.ui.theme.Gray200
 
 @Composable
-fun KanbanCard(
-    card: Card,
-    modifier: Modifier = Modifier,
-) {
+fun KanbanCard(card: Card, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .clip(shape = RoundedCornerShape(10.dp))
@@ -33,8 +30,8 @@ fun KanbanCard(
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         CardTitle(card.title)
-        card.content?.let {
-            content -> CardContent(content)
+        card.content?.let { content ->
+            CardContent(content)
         }
         if (card.tags.isNotEmpty()) CardTags(card.tags)
         Box {

@@ -30,7 +30,7 @@ fun TagArea(
             isError = isError,
             errorMessage = errorMessage,
             placeHolderMessage = "태그를 쉼표로 구분하여 입력하세요 (예: 버그,긴급)",
-            supportingText = "5자 이내의 태그를 최대 5개까지 등록할 수 있습니다."
+            supportingText = "5자 이내의 태그를 최대 5개까지 등록할 수 있습니다.",
         )
     }
 }
@@ -42,6 +42,6 @@ private fun TagPreview() {
         value = "",
         onTagChange = {},
         isError = false,
-        errorMessage = null
+        errorMessage = null,
     )
 }

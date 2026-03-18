@@ -17,11 +17,7 @@ import woowacourse.kanban.board.ui.theme.Gray500
 import woowacourse.kanban.board.ui.theme.Red
 
 @Composable
-fun ContentArea(
-    modifier: Modifier = Modifier,
-    value: String,
-    onContentChange: (String) -> Unit,
-) {
+fun ContentArea(modifier: Modifier = Modifier, value: String, onContentChange: (String) -> Unit) {
     Column(
         modifier = modifier.fillMaxWidth(1f),
         verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -29,7 +25,7 @@ fun ContentArea(
         Label("설명")
         OutlinedTextField(
             value = value,
-            onValueChange =  {
+            onValueChange = {
                 onContentChange(it)
             },
             modifier = Modifier.fillMaxWidth(1f),
@@ -54,6 +50,6 @@ fun ContentArea(
 private fun ContentPreview() {
     ContentArea(
         value = "",
-        onContentChange = {}
+        onContentChange = {},
     )
 }
