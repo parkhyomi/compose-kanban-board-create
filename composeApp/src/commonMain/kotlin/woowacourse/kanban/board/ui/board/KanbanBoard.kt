@@ -6,56 +6,132 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.launch
+import woowacourse.kanban.board.domain.model.Card
 import woowacourse.kanban.board.domain.model.Status
 import woowacourse.kanban.board.ui.create.KanbanCreateDialog
 import woowacourse.kanban.board.ui.preview.KanbanPreview
+
+const val TASK_CREATED_SNACKBAR_MESSAGE = "새 태스크가 추가되었습니다."
 
 @Composable
 fun KanbanBoard() {
     var showDialog by remember { mutableStateOf(false) }
 
-    Column {
-        BoardInfoHeader(
-            totalCount = 10 , /** totalCount 넣어야함 **/
-            doneCount = 5, /** doneCount 넣어야함 **/
-            onTaskCreate = {
-                showDialog = true
-            },
-            modifier = Modifier
-                .background(Color.White)
-                .padding(horizontal = 24.dp, vertical = 16.dp),
-        )
-        HorizontalDivider()
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 24.dp, vertical = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
+    var todoCards by remember { mutableStateOf(emptyList<Card>()) }
+    var inProgressCards by remember { mutableStateOf(emptyList<Card>()) }
+    var doneCards by remember { mutableStateOf(emptyList<Card>()) }
+
+    val totalCount = todoCards.size + inProgressCards.size + doneCards.size
+    val doneCount = doneCards.size
+
+    val snackBarHostState = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
+
+    Scaffold(
+        snackbarHost = {
+            SnackbarHost(
+                hostState = snackBarHostState,
+                modifier = Modifier
+                    .padding(horizontal = 16.dp, vertical = 14.dp),
+            ) { snackbarData ->
+                Snackbar(
+                    dismissAction = {
+                        IconButton(
+                            onClick = {
+                                snackbarData.dismiss()
+                            },
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Close,
+                                contentDescription = "스낵바 닫기",
+                            )
+                        }
+                    },
+                ) {
+                    Text(text = snackbarData.visuals.message)
+                }
+            }
+        }
+    ) { contentPadding ->
+        Column(
+            modifier = Modifier.padding(contentPadding)
         ) {
-            Status.entries.forEach { status ->
-                BoardTaskBox(
-                    boardTaskStatus = status,
-                    boardTaskCount = 10, /** status 별 count 값 넣어야함 **/
-                    headerColor = statusBackgroundColor(status),
-                    borderColor = statusBorderColor(status),
-                    mainColor = statusMainColor(status),
-                    modifier = Modifier.weight(1f),
-                )
+            BoardInfoHeader(
+                totalCount = totalCount,
+                doneCount = doneCount,
+                onTaskCreate = {
+                    showDialog = true
+                },
+                modifier = Modifier
+                    .background(Color.White)
+                    .padding(horizontal = 24.dp, vertical = 16.dp),
+            )
+            HorizontalDivider()
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 24.dp, vertical = 16.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+            ) {
+                Status.entries.forEach { status ->
+                    val statusCards = when (status) {
+                        Status.TODO -> todoCards
+                        Status.IN_PROGRESS -> inProgressCards
+                        Status.DONE -> doneCards
+                    }
+                    BoardTaskBox(
+                        boardTaskStatus = status,
+                        cards = statusCards,
+                        boardTaskCount = statusCards.size,
+                        headerColor = statusBackgroundColor(status),
+                        borderColor = statusBorderColor(status),
+                        mainColor = statusMainColor(status),
+                        modifier = Modifier.weight(1f),
+                    )
+                }
             }
         }
     }
     if (showDialog) {
         KanbanCreateDialog(
             onDismissRequest = { showDialog = false },
+            onCreateConfirm = { status, card ->
+                showDialog = false
+                when (status) {
+                    Status.TODO -> todoCards = todoCards + card
+                    Status.IN_PROGRESS -> inProgressCards = inProgressCards + card
+                    Status.DONE -> doneCards = doneCards + card
+                }
+                scope.launch {
+                    snackBarHostState.currentSnackbarData?.dismiss()
+                    snackBarHostState.showSnackbar(
+                        message = TASK_CREATED_SNACKBAR_MESSAGE,
+                        withDismissAction = true,
+                        duration = SnackbarDuration.Indefinite,
+                    )
+                }
+            },
         )
     }
 }
@@ -89,4 +165,3 @@ private fun statusBorderColor(status: Status): Color {
 private fun KanbanBoardPreview() {
     KanbanBoard()
 }
-

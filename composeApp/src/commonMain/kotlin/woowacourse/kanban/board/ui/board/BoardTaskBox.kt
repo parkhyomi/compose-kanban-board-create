@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,35 +17,57 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import woowacourse.kanban.board.domain.model.Card
 import woowacourse.kanban.board.domain.model.Status
+import woowacourse.kanban.board.domain.model.User
+import woowacourse.kanban.board.ui.card.KanbanCard
 import woowacourse.kanban.board.ui.component.toDisplayText
 import woowacourse.kanban.board.ui.theme.Blue
 
 @Composable
 fun BoardTaskBox(
     boardTaskStatus: Status,
+    cards: List<Card>,
     boardTaskCount: Int,
     headerColor: Color,
     mainColor: Color,
     borderColor: Color,
     modifier: Modifier = Modifier,
 ) {
-    Box(
+    Column(
         modifier = modifier
             .fillMaxSize()
             .clip(RoundedCornerShape(10.dp))
             .background(mainColor)
             .border(color = borderColor, width = 1.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         BoardTaskBox_Header(
             status = boardTaskStatus,
             count = boardTaskCount,
             backgroundColor = headerColor,
         )
+
+        if (cards.isNotEmpty()) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 17.dp, vertical = 16.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                cards.forEach { card ->
+                    KanbanCard(
+                        card = card,
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+                }
+            }
+        }
     }
 }
 
@@ -104,6 +127,15 @@ private fun BoardTaskBox_HeaderPreview() {
 private fun BoardTaskBoxPreview() {
     BoardTaskBox(
         boardTaskStatus = Status.TODO,
+        cards = listOf(
+            Card(
+                title = "UI 구현",
+                user = User("디노")
+            ),
+            Card(
+                title = "UI 구현",
+                user = User("디노"))
+        ),
         boardTaskCount = 10,
         headerColor = Color(0xff155DFC),
         mainColor = Color(0xffEFF6FF),
