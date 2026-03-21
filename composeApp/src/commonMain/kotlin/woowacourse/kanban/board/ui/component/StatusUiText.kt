@@ -1,4 +1,4 @@
-package woowacourse.kanban.board.ui.create.maincontent
+package woowacourse.kanban.board.ui.component
 
 import woowacourse.kanban.board.domain.model.Status
 

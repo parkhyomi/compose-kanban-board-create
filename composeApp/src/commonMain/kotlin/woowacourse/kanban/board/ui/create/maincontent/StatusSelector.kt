@@ -16,9 +16,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import woowacourse.kanban.board.domain.model.Status
 import woowacourse.kanban.board.ui.component.Label
+import woowacourse.kanban.board.ui.component.toDisplayText
 import woowacourse.kanban.board.ui.preview.KanbanPreview
 
 private const val CONTENT_LABEL = "상태"
@@ -88,7 +90,7 @@ private fun StatusPreview() {
 }
 
 @Composable
-@KanbanPreview
+@Preview
 private fun StatusChipPreview() {
     var status by remember { mutableStateOf(Status.TODO) }
     StatusSelectorChip(
