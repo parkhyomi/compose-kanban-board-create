@@ -20,7 +20,11 @@ private const val TITLE_LABEL = "설명"
 private const val TITLE_LABEL_PLACEHOLDER = "태스크에 대한 자세한 설명을 입력하세요"
 
 @Composable
-fun ContentArea(modifier: Modifier = Modifier, value: String, onContentChange: (String) -> Unit) {
+fun ContentArea(
+    value: String,
+    onContentChange: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
     Column(
         modifier = modifier.fillMaxWidth(1f),
         verticalArrangement = Arrangement.spacedBy(8.dp),

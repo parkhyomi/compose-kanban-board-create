@@ -16,9 +16,9 @@ private const val TAG_LABEL_SUPPORTING = "5자 이내의 태그를 최대 5개�
 
 @Composable
 fun TagArea(
-    modifier: Modifier = Modifier,
     value: String,
     onTagChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
     errorMessage: String? = null,
     isError: Boolean = false,
 ) {

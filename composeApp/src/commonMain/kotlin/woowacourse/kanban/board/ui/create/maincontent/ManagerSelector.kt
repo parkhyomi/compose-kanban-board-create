@@ -22,8 +22,14 @@ import woowacourse.kanban.board.ui.component.Label
 import woowacourse.kanban.board.ui.preview.KanbanPreview
 
 const val MANAGER_LABEL = "담당자"
+
 @Composable
-fun ManagerSelector(modifier: Modifier = Modifier, managers: List<User>, selectedUser: User, onUserChange: (User) -> Unit) {
+fun ManagerSelector(
+    managers: List<User>,
+    selectedUser: User,
+    onUserChange: (User) -> Unit,
+    modifier: Modifier = Modifier,
+) {
     Column(
         modifier = modifier.fillMaxWidth(1f),
         verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -50,7 +56,12 @@ fun ManagerSelector(modifier: Modifier = Modifier, managers: List<User>, selecte
 }
 
 @Composable
-fun ManagerSelectorChip(managers: User, selectedUser: Boolean, onUserChange: () -> Unit, modifier: Modifier = Modifier) {
+fun ManagerSelectorChip(
+    managers: User,
+    selectedUser: Boolean,
+    onUserChange: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
     FilterChip(
         selected = selectedUser,
         onClick = onUserChange,

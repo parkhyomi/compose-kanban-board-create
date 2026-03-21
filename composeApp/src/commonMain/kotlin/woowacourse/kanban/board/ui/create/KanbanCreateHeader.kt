@@ -20,7 +20,10 @@ import woowacourse.kanban.board.ui.preview.KanbanPreview
 const val HEAD_TEXT = "새 태스크 생성"
 
 @Composable
-fun KanbanCreateHeader(modifier: Modifier = Modifier, onDismiss: () -> Unit) {
+fun KanbanCreateHeader(
+    onDismiss: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
     Row(
         modifier = modifier.fillMaxWidth(1f)
             .background(Color.White),

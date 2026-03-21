@@ -26,7 +26,11 @@ import woowacourse.kanban.board.ui.preview.KanbanPreview
 private const val CONTENT_LABEL = "상태"
 
 @Composable
-fun StatusSelector(modifier: Modifier = Modifier, selectedStatus: Status = Status.TODO, onStatusChange: (Status) -> Unit) {
+fun StatusSelector(
+    onStatusChange: (Status) -> Unit,
+    modifier: Modifier = Modifier,
+    selectedStatus: Status = Status.TODO,
+) {
     Column(
         modifier = modifier.fillMaxWidth(1f),
         verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -49,7 +53,12 @@ fun StatusSelector(modifier: Modifier = Modifier, selectedStatus: Status = Statu
 }
 
 @Composable
-fun StatusSelectorChip(modifier: Modifier = Modifier, status: Status, selectedStatus: Status, onStatusChange: (Status) -> Unit) {
+fun StatusSelectorChip(
+    status: Status,
+    selectedStatus: Status,
+    onStatusChange: (Status) -> Unit,
+    modifier: Modifier = Modifier,
+) {
     FilterChip(
         selected = selectedStatus == status,
         onClick = {

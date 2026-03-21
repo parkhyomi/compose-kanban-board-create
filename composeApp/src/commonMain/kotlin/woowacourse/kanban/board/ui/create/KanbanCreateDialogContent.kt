@@ -30,9 +30,9 @@ import woowacourse.kanban.board.ui.preview.KanbanPreview
 
 @Composable
 fun KanbanCreateDialogContent(
-    modifier: Modifier = Modifier,
     onDismiss: () -> Unit,
     onCreateConfirm: (Status, Card) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     var title by remember { mutableStateOf("") }
     var isTitleError by remember { mutableStateOf(false) }

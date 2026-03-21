@@ -19,7 +19,12 @@ private const val TITLE_LABEL_PLACEHOLDER = "태스크 제목을 입력하세요
 private const val TITLE_ERROR_MESSAGE = "제목을 입력해주세요."
 
 @Composable
-fun TitleArea(modifier: Modifier = Modifier, value: String, onTitleChange: (String) -> Unit, isError: Boolean = false) {
+fun TitleArea(
+    value: String,
+    onTitleChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    isError: Boolean = false,
+) {
     Column(
         modifier = modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(8.dp),
