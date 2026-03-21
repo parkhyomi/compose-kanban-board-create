@@ -13,6 +13,8 @@ fun KanbanBoard() {
     var showDialog by remember { mutableStateOf(false) }
 
     BoardInfoHeader(
+        totalCount = 10,
+        doneCount = 5,
         onTaskCreate = {
             showDialog = true
         },

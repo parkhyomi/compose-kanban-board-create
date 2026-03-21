@@ -16,12 +16,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import woowacourse.kanban.board.ui.preview.KanbanPreview
 import woowacourse.kanban.board.ui.theme.Blue
+
+internal const val BOARD_PROGRESS_TEST_TAG = "board_progress_bar"
 
 @Composable
 fun BoardInfoHeader(
@@ -30,6 +34,8 @@ fun BoardInfoHeader(
     onTaskCreate: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+
+    val complete = taskComplete(doneCount, totalCount)
     Column(
         modifier = modifier.fillMaxWidth(),
     ) {
@@ -45,28 +51,39 @@ fun BoardInfoHeader(
                     fontWeight = FontWeight.Medium,
                 )
                 Text(
-                    text = "완료율: "+taskComplete(doneCount, totalCount)+" (${doneCount}/${totalCount})",
+                    text = "완료율: ${complete}% (${doneCount}/${totalCount})",
                 )
             }
 
-            BoardInfoHeader_ContentButton(onTaskCreate)
+            BoardInfoHeader_ContentButton(onTaskCreate = onTaskCreate)
         }
-        BoardInfoHeader_Progress()
+        BoardInfoHeader_Progress(taskComplete = complete)
     }
 }
 
-fun taskComplete(doneCount: Int, totalCount: Int): String {
-    if (totalCount == 0) return "0%"
+fun taskComplete(doneCount: Int, totalCount: Int): Int {
+    if (totalCount == 0) return 0
 
-    val progress = (doneCount * 100) / totalCount
-    return "$progress%"
+    val safeDoneCount = doneCount.coerceIn(0, totalCount)
+    val progress = (safeDoneCount * 100) / totalCount
+    return progress
 }
 
 @Composable
 fun BoardInfoHeader_Progress(
+    taskComplete: Int,
     modifier: Modifier = Modifier,
 ) {
-    LinearProgressIndicator(modifier = modifier.fillMaxWidth())
+    val progress = taskComplete.coerceIn(0, 100) / 100f
+    LinearProgressIndicator(
+        progress = { progress },
+        modifier = modifier
+            .fillMaxWidth()
+            .testTag(BOARD_PROGRESS_TEST_TAG),
+        color = Blue,
+        trackColor = Color.LightGray,
+        strokeCap = StrokeCap.Round,
+    )
 }
 
 @Composable
@@ -105,7 +122,9 @@ private fun BoardInfoHeaderPreview() {
 @Preview
 @Composable
 private fun BoardInfoHeader_ProgressPreview() {
-    BoardInfoHeader_Progress()
+    BoardInfoHeader_Progress(
+        taskComplete = 50,
+    )
 }
 
 @Preview
