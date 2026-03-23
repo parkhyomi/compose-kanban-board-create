@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
@@ -53,13 +55,19 @@ fun BoardTaskBox(
         )
 
         if (cards.isNotEmpty()) {
-            Column(
+            LazyColumn(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 17.dp, vertical = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
-                cards.forEach { card ->
+                itemsIndexed(
+                    items = cards,
+                    key = { index, card ->
+                        "${boardTaskStatus.name}_${card.title}_${card.user?.name}_$index"
+                    },
+                    contentType = { _, _ -> "kanban_card" },
+                ) { _, card ->
                     KanbanCard(
                         card = card,
                         modifier = Modifier.fillMaxWidth(),
@@ -129,11 +137,12 @@ private fun BoardTaskBoxPreview() {
         cards = listOf(
             Card(
                 title = "UI 구현",
-                user = User("디노")
+                user = User("디노"),
             ),
             Card(
                 title = "UI 구현",
-                user = User("디노"))
+                user = User("디노"),
+            ),
         ),
         boardTaskCount = 10,
         headerColor = Color(0xff155DFC),
