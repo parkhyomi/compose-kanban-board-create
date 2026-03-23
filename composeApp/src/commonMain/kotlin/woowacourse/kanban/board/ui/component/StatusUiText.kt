@@ -1,15 +1,18 @@
 package woowacourse.kanban.board.ui.component
 
+import androidx.compose.runtime.Composable
+import kanbanboard.composeapp.generated.resources.Res
+import kanbanboard.composeapp.generated.resources.done
+import kanbanboard.composeapp.generated.resources.in_progress
+import kanbanboard.composeapp.generated.resources.todo
+import org.jetbrains.compose.resources.stringResource
 import woowacourse.kanban.board.domain.model.Status
 
-private const val TODO_TEXT = "To Do"
-private const val IN_PROGRESS_TEXT = "In Progress"
-private const val DONE_TEXT = "Done"
-
+@Composable
 fun Status.toDisplayText(): String {
     return when (this) {
-        Status.TODO -> TODO_TEXT
-        Status.IN_PROGRESS -> IN_PROGRESS_TEXT
-        Status.DONE -> DONE_TEXT
+        Status.TODO -> stringResource(Res.string.todo)
+        Status.IN_PROGRESS -> stringResource(Res.string.in_progress)
+        Status.DONE -> stringResource(Res.string.done)
     }
 }

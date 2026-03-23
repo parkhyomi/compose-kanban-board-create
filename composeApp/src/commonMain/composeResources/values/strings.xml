@@ -26,6 +26,11 @@
     <string name="content_label">설명</string>
     <string name="content_label_placeholder">태스크에 대한 자세한 설명을 입력하세요</string>
 
+    <!-- 상태 표시 -->
+    <string name="todo">To Do</string>
+    <string name="in_progress">In Progress</string>
+    <string name="done">Done</string>
+
     <!--보드 스낵바-->
     <string name="task_created_snackbar_message">새 태스크가 추가되었습니다.</string>
 
