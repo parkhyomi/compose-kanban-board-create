@@ -22,6 +22,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kanbanboard.composeapp.generated.resources.Res
+import kanbanboard.composeapp.generated.resources.create_task_text
+import org.jetbrains.compose.resources.stringResource
 import woowacourse.kanban.board.ui.preview.KanbanPreview
 import woowacourse.kanban.board.ui.theme.Blue
 
@@ -97,6 +100,8 @@ fun BoardInfoHeader_ContentButton(
     onTaskCreate: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val createTaskText = stringResource(Res.string.create_task_text)
+
     Button(
         modifier = modifier,
         onClick = onTaskCreate,
@@ -105,11 +110,11 @@ fun BoardInfoHeader_ContentButton(
     ) {
         Icon(
             imageVector = Icons.Default.Add,
-            contentDescription = "새 태스크 생성",
+            contentDescription = createTaskText,
             modifier = Modifier.size(20.dp),
         )
         Text(
-            text = "새 태스크 생성",
+            text = createTaskText,
             color = Color.White,
         )
     }

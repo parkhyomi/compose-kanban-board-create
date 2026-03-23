@@ -16,12 +16,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import kanbanboard.composeapp.generated.resources.Res
+import kanbanboard.composeapp.generated.resources.manager_label
+import org.jetbrains.compose.resources.stringResource
 import woowacourse.kanban.board.domain.model.User
 import woowacourse.kanban.board.ui.card.CardUserProfile
 import woowacourse.kanban.board.ui.component.Label
 import woowacourse.kanban.board.ui.preview.KanbanPreview
-
-const val MANAGER_LABEL = "담당자"
 
 @Composable
 fun ManagerSelector(
@@ -34,7 +35,7 @@ fun ManagerSelector(
         modifier = modifier.fillMaxWidth(1f),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        Label(MANAGER_LABEL, true)
+        Label(stringResource(Res.string.manager_label), true)
         managers.chunked(3).forEach { users ->
             Row(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),

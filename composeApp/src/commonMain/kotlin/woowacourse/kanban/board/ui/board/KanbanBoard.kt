@@ -26,13 +26,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import kanbanboard.composeapp.generated.resources.Res
+import kanbanboard.composeapp.generated.resources.task_created_snackbar_message
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.stringResource
 import woowacourse.kanban.board.domain.model.Card
 import woowacourse.kanban.board.domain.model.Status
 import woowacourse.kanban.board.ui.create.KanbanCreateDialog
 import woowacourse.kanban.board.ui.preview.KanbanPreview
-
-const val TASK_CREATED_SNACKBAR_MESSAGE = "새 태스크가 추가되었습니다."
 
 @Composable
 fun KanbanBoard() {
@@ -47,6 +48,8 @@ fun KanbanBoard() {
 
     val snackBarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
+
+    val taskCreatedSnackbarMessage = stringResource(Res.string.task_created_snackbar_message)
 
     Scaffold(
         snackbarHost = {
@@ -126,7 +129,7 @@ fun KanbanBoard() {
                 scope.launch {
                     snackBarHostState.currentSnackbarData?.dismiss()
                     snackBarHostState.showSnackbar(
-                        message = TASK_CREATED_SNACKBAR_MESSAGE,
+                        message = taskCreatedSnackbarMessage,
                         withDismissAction = true,
                         duration = SnackbarDuration.Indefinite,
                     )

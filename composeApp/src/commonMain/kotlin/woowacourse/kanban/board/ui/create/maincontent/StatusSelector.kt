@@ -18,12 +18,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kanbanboard.composeapp.generated.resources.Res
+import kanbanboard.composeapp.generated.resources.status_label
+import org.jetbrains.compose.resources.stringResource
 import woowacourse.kanban.board.domain.model.Status
 import woowacourse.kanban.board.ui.component.Label
 import woowacourse.kanban.board.ui.component.toDisplayText
 import woowacourse.kanban.board.ui.preview.KanbanPreview
-
-private const val CONTENT_LABEL = "상태"
 
 @Composable
 fun StatusSelector(
@@ -35,7 +36,7 @@ fun StatusSelector(
         modifier = modifier.fillMaxWidth(1f),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        Label(CONTENT_LABEL, true)
+        Label(stringResource(Res.string.status_label), true)
         Row(
             modifier = Modifier.fillMaxWidth(1f),
             horizontalArrangement = Arrangement.spacedBy(8.dp),

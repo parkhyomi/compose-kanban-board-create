@@ -14,6 +14,8 @@ import woowacourse.kanban.board.domain.model.Card
 import woowacourse.kanban.board.domain.model.Status
 import woowacourse.kanban.board.domain.model.User
 
+private const val TASK_CREATED_SNACKBAR = "새 태스크가 추가되었습니다."
+
 @OptIn(ExperimentalCoroutinesApi::class)
 class KanbanBoardTest {
 
@@ -40,7 +42,7 @@ class KanbanBoardTest {
         val snackBarHostState = SnackbarHostState()
         val snackbar = launch {
             snackBarHostState.showSnackbar(
-                message = TASK_CREATED_SNACKBAR_MESSAGE,
+                message = TASK_CREATED_SNACKBAR,
                 withDismissAction = true,
                 duration = SnackbarDuration.Indefinite,
             )
@@ -48,7 +50,7 @@ class KanbanBoardTest {
 
         advanceUntilIdle()
         val currentMessage = snackBarHostState.currentSnackbarData?.visuals?.message
-        assertEquals(TASK_CREATED_SNACKBAR_MESSAGE, currentMessage)
+        assertEquals(TASK_CREATED_SNACKBAR, currentMessage)
 
         snackbar.cancel()
     }
@@ -58,7 +60,7 @@ class KanbanBoardTest {
         val snackBarHostState = SnackbarHostState()
         val snackbar = launch {
             snackBarHostState.showSnackbar(
-                message = TASK_CREATED_SNACKBAR_MESSAGE,
+                message = TASK_CREATED_SNACKBAR,
                 withDismissAction = true,
                 duration = SnackbarDuration.Indefinite,
             )

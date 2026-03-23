@@ -15,9 +15,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import kanbanboard.composeapp.generated.resources.Res
+import kanbanboard.composeapp.generated.resources.create_task_text
+import org.jetbrains.compose.resources.stringResource
 import woowacourse.kanban.board.ui.preview.KanbanPreview
-
-const val HEAD_TEXT = "새 태스크 생성"
 
 @Composable
 fun KanbanCreateHeader(
@@ -31,7 +32,7 @@ fun KanbanCreateHeader(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
-            text = HEAD_TEXT,
+            text = stringResource(Res.string.create_task_text),
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
         )
