@@ -27,6 +27,8 @@ import woowacourse.kanban.board.domain.model.Card
 import woowacourse.kanban.board.domain.model.Status
 import woowacourse.kanban.board.domain.model.User
 import woowacourse.kanban.board.ui.card.KanbanCard
+import woowacourse.kanban.board.ui.component.BoardTaskBoxColors
+import woowacourse.kanban.board.ui.component.BoardTaskBoxDefaults
 import woowacourse.kanban.board.ui.component.toDisplayText
 import woowacourse.kanban.board.ui.theme.Blue
 
@@ -35,23 +37,21 @@ fun BoardTaskBox(
     boardTaskStatus: Status,
     cards: List<Card>,
     boardTaskCount: Int,
-    headerColor: Color,
-    mainColor: Color,
-    borderColor: Color,
+    colors: BoardTaskBoxColors,
     modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier
             .fillMaxSize()
             .clip(RoundedCornerShape(10.dp))
-            .background(mainColor)
-            .border(color = borderColor, width = 1.dp),
+            .background(colors.mainColor)
+            .border(color = colors.borderColor, width = 1.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        BoardTaskBox_Header(
+        BoardTaskBoxHeader(
             status = boardTaskStatus,
             count = boardTaskCount,
-            backgroundColor = headerColor,
+            backgroundColor = colors.headerColor,
         )
 
         if (cards.isNotEmpty()) {
@@ -79,7 +79,7 @@ fun BoardTaskBox(
 }
 
 @Composable
-fun BoardTaskBox_Header(
+fun BoardTaskBoxHeader(
     status: Status,
     count: Int,
     backgroundColor: Color,
@@ -122,7 +122,7 @@ fun BoardTaskBox_Header(
 @Composable
 @Preview(showBackground = true)
 private fun BoardTaskBox_HeaderPreview() {
-    BoardTaskBox_Header(
+    BoardTaskBoxHeader(
         status = Status.TODO,
         count = 10,
         backgroundColor = Blue,
@@ -145,8 +145,6 @@ private fun BoardTaskBoxPreview() {
             ),
         ),
         boardTaskCount = 10,
-        headerColor = Color(0xff155DFC),
-        mainColor = Color(0xffEFF6FF),
-        borderColor = Color(0xffBEDBFF),
+        colors = BoardTaskBoxDefaults.colors(Status.TODO),
     )
 }

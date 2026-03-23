@@ -32,6 +32,7 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import woowacourse.kanban.board.domain.model.Card
 import woowacourse.kanban.board.domain.model.Status
+import woowacourse.kanban.board.ui.component.BoardTaskBoxDefaults
 import woowacourse.kanban.board.ui.create.KanbanCreateDialog
 import woowacourse.kanban.board.ui.preview.KanbanPreview
 
@@ -107,9 +108,7 @@ fun KanbanBoard() {
                         boardTaskStatus = status,
                         cards = statusCards,
                         boardTaskCount = statusCards.size,
-                        headerColor = statusBackgroundColor(status),
-                        borderColor = statusBorderColor(status),
-                        mainColor = statusMainColor(status),
+                        colors = BoardTaskBoxDefaults.colors(status),
                         modifier = Modifier.weight(1f),
                     )
                 }
@@ -136,30 +135,6 @@ fun KanbanBoard() {
                 }
             },
         )
-    }
-}
-
-private fun statusBackgroundColor(status: Status): Color {
-    return when (status) {
-        Status.TODO -> Color(0xFF155DFC)
-        Status.IN_PROGRESS -> Color(0xFFE17100)
-        Status.DONE -> Color(0xff00A63E)
-    }
-}
-
-private fun statusMainColor(status: Status): Color {
-    return when (status) {
-        Status.TODO -> Color(0xffEFF6FF)
-        Status.IN_PROGRESS -> Color(0xffFFFBEB)
-        Status.DONE -> Color(0xFfF0FDF4)
-    }
-}
-
-private fun statusBorderColor(status: Status): Color {
-    return when (status) {
-        Status.TODO -> Color(0xffBEDBFF)
-        Status.IN_PROGRESS -> Color(0xffFEE685)
-        Status.DONE -> Color(0xFFB9F8CF)
     }
 }
 
