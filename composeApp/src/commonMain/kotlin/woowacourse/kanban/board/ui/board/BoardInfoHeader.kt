@@ -62,9 +62,9 @@ fun BoardInfoHeader(
                 )
             }
 
-            BoardInfoHeader_ContentButton(onTaskCreate = onTaskCreate)
+            BoardInfoHeaderContentButton(onTaskCreate = onTaskCreate)
         }
-        BoardInfoHeader_Progress(taskComplete = complete)
+        BoardInfoHeaderProgressBar(taskComplete = complete)
     }
 }
 
@@ -77,7 +77,7 @@ fun taskComplete(doneCount: Int, totalCount: Int): Int {
 }
 
 @Composable
-fun BoardInfoHeader_Progress(
+private fun BoardInfoHeaderProgressBar(
     taskComplete: Int,
     modifier: Modifier = Modifier,
 ) {
@@ -96,7 +96,7 @@ fun BoardInfoHeader_Progress(
 }
 
 @Composable
-fun BoardInfoHeader_ContentButton(
+private fun BoardInfoHeaderContentButton(
     onTaskCreate: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -133,7 +133,7 @@ private fun BoardInfoHeaderPreview() {
 @Preview
 @Composable
 private fun BoardInfoHeader_ProgressPreview() {
-    BoardInfoHeader_Progress(
+    BoardInfoHeaderProgressBar(
         taskComplete = 50,
     )
 }
@@ -141,5 +141,5 @@ private fun BoardInfoHeader_ProgressPreview() {
 @Preview
 @Composable
 private fun BoardInfoHeader_ContentButtonPreview() {
-    BoardInfoHeader_ContentButton(onTaskCreate = { })
+    BoardInfoHeaderContentButton(onTaskCreate = { })
 }
