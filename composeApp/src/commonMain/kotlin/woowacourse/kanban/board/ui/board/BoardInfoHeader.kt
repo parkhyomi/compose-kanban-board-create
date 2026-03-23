@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.sp
 import kanbanboard.composeapp.generated.resources.Res
 import kanbanboard.composeapp.generated.resources.create_task_text
 import org.jetbrains.compose.resources.stringResource
+import woowacourse.kanban.board.domain.model.taskComplete
 import woowacourse.kanban.board.ui.preview.KanbanPreview
 import woowacourse.kanban.board.ui.theme.Blue
 
@@ -66,14 +67,6 @@ fun BoardInfoHeader(
         }
         BoardInfoHeaderProgressBar(taskComplete = complete)
     }
-}
-
-fun taskComplete(doneCount: Int, totalCount: Int): Int {
-    if (totalCount == 0) return 0
-
-    val safeDoneCount = doneCount.coerceIn(0, totalCount)
-    val progress = (safeDoneCount * 100) / totalCount
-    return progress
 }
 
 @Composable
