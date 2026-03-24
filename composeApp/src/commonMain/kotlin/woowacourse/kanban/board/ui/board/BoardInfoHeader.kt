@@ -65,16 +65,16 @@ fun BoardInfoHeader(
 
             BoardInfoHeaderContentButton(onTaskCreate = onTaskCreate)
         }
-        BoardInfoHeaderProgressBar(taskComplete = complete)
+        BoardInfoHeaderProgressBar(completionPercent = complete)
     }
 }
 
 @Composable
-private fun BoardInfoHeaderProgressBar(
-    taskComplete: Int,
+fun BoardInfoHeaderProgressBar(
+    completionPercent: Int,
     modifier: Modifier = Modifier,
 ) {
-    val progress = taskComplete.coerceIn(0, 100) / 100f
+    val progress = completionPercent.coerceIn(0, 100) / 100f
     LinearProgressIndicator(
         progress = { progress },
         modifier = modifier
@@ -127,7 +127,7 @@ private fun BoardInfoHeaderPreview() {
 @Composable
 private fun BoardInfoHeader_ProgressPreview() {
     BoardInfoHeaderProgressBar(
-        taskComplete = 50,
+        completionPercent = 50,
     )
 }
 
