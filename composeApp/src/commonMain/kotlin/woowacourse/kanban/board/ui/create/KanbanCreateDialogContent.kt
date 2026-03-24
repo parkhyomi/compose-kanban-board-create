@@ -12,15 +12,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import woowacourse.kanban.board.domain.model.Card
 import woowacourse.kanban.board.domain.model.Status
-import woowacourse.kanban.board.domain.model.Tag
 import woowacourse.kanban.board.domain.model.User
-import woowacourse.kanban.board.domain.validator.validateTagInput
 import woowacourse.kanban.board.ui.create.maincontent.ContentArea
 import woowacourse.kanban.board.ui.create.maincontent.ManagerSelector
 import woowacourse.kanban.board.ui.create.maincontent.StatusSelector
@@ -34,18 +31,8 @@ fun KanbanCreateDialogContent(
     onCreateConfirm: (Status, Card) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    var title by remember { mutableStateOf("") }
-    var isTitleError by remember { mutableStateOf(false) }
-
-    var content by remember { mutableStateOf("") }
-
-    var tag by remember { mutableStateOf("") }
-    var isTagError by remember { mutableStateOf(false) }
-    var isTagErrorMessage: String? by remember { mutableStateOf(null) }
-
-    var status by remember { mutableStateOf(Status.TODO) }
-
-    var selectedUser by remember { mutableStateOf(User.managersList.first()) }
+    val managers = User.managersList
+    val state by remember { mutableStateOf(KanbanCreateDialogContentState(managers.first())) }
 
     Column(
         modifier = modifier
@@ -70,75 +57,44 @@ fun KanbanCreateDialogContent(
         ) {
 
             TitleArea(
-                value = title,
-                onTitleChange = {
-                    title = it
-                    isTitleError = title.isBlank()
-                },
-                isError = isTitleError,
+                value = state.title,
+                onTitleChange = state::onTitleChange,
+                isError = state.isTitleError,
             )
 
             ContentArea(
-                value = content,
-                onContentChange = {
-                    content = it
-                },
+                value = state.content,
+                onContentChange = state::onContentChange,
             )
 
             TagArea(
-                value = tag,
-                onTagChange = {
-                    tag = it
-                    isTagErrorMessage = validateTagInput(it)
-                    isTagError = isTagErrorMessage != null
-                },
-                errorMessage = isTagErrorMessage,
-                isError = isTagError,
+                value = state.tag,
+                onTagChange = state::onTagChange,
+                errorMessage = state.tagErrorMessage,
+                isError = state.isTagError,
             )
 
             StatusSelector(
-                selectedStatus = status,
-                onStatusChange = {
-                    status = it
-                },
+                selectedStatus = state.status,
+                onStatusChange = state::onStatusChange,
             )
 
             ManagerSelector(
-                managers = User.managersList,
-                selectedUser = selectedUser,
-                onUserChange = {
-                    selectedUser = it
-                },
+                managers = managers,
+                selectedUser = state.selectedUser,
+                onUserChange = state::onUserChange,
             )
         }
         HorizontalDivider()
         KanbanCreateFooter(
             onClickCancel = onDismiss,
             onClickConfirm = {
-                val tags = parseTagInput(tag)
-                onCreateConfirm(
-                    status,
-                    Card(
-                        title = title,
-                        content = content.takeIf { it.isNotBlank() },
-                        tags = tags,
-                        user = selectedUser,
-                    ),
-                )
+                val (status, card) = state.buildCreateResult()
+                onCreateConfirm(status, card)
             },
-            enabled = !isTitleError && title.isNotBlank() && !isTagError,
+            enabled = state.isConfirmEnabled,
         )
     }
-}
-
-private fun parseTagInput(tagInput: String): List<Tag> {
-    if (tagInput.isBlank()) return emptyList()
-
-    return tagInput
-        .split(",")
-        .map { it.trim() }
-        .filter { it.isNotEmpty() }
-        .map(::Tag)
 }
 
 @Composable
