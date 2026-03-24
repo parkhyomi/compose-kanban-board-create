@@ -72,7 +72,7 @@ class BoardHeaderTest {
     @Test
     fun `완료율에 맞춰 바의 길이가 변한다`() = runComposeUiTest {
         setContent {
-            BoardInfoHeaderProgressBar(taskComplete = 50)
+            BoardInfoHeaderProgressBar(completionPercent = 50)
         }
 
         onNodeWithTag(BOARD_PROGRESS_TEST_TAG)
