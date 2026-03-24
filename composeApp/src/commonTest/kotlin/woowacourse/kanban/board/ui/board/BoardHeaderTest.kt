@@ -10,6 +10,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.runComposeUiTest
 import androidx.compose.ui.semantics.ProgressBarRangeInfo
+import woowacourse.kanban.board.domain.model.taskComplete
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -71,7 +72,7 @@ class BoardHeaderTest {
     @Test
     fun `완료율에 맞춰 바의 길이가 변한다`() = runComposeUiTest {
         setContent {
-            BoardInfoHeader_Progress(taskComplete = 50)
+            BoardInfoHeaderProgressBar(taskComplete = 50)
         }
 
         onNodeWithTag(BOARD_PROGRESS_TEST_TAG)
