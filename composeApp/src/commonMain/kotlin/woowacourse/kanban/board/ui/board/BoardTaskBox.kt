@@ -10,7 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
@@ -61,13 +61,10 @@ fun BoardTaskBox(
                     .padding(horizontal = 17.dp, vertical = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
-                itemsIndexed(
+                items(
                     items = cards,
-                    key = { index, card ->
-                        "${boardTaskStatus.name}_${card.title}_${card.user?.name}_$index"
-                    },
-                    contentType = { _, _ -> "kanban_card" },
-                ) { _, card ->
+                    key = { card -> card.id },
+                ) { card ->
                     KanbanCard(
                         card = card,
                         modifier = Modifier.fillMaxWidth(),
@@ -121,7 +118,7 @@ fun BoardTaskBoxHeader(
 
 @Composable
 @Preview(showBackground = true)
-private fun BoardTaskBox_HeaderPreview() {
+private fun BoardTaskBoxHeaderPreview() {
     BoardTaskBoxHeader(
         status = Status.TODO,
         count = 10,
