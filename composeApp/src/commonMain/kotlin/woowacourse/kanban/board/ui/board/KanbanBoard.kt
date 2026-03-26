@@ -30,22 +30,18 @@ import kanbanboard.composeapp.generated.resources.Res
 import kanbanboard.composeapp.generated.resources.task_created_snackbar_message
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
-import woowacourse.kanban.board.domain.model.Card
 import woowacourse.kanban.board.domain.model.Status
 import woowacourse.kanban.board.ui.component.BoardTaskBoxDefaults
 import woowacourse.kanban.board.ui.create.KanbanCreateDialog
 import woowacourse.kanban.board.ui.preview.KanbanPreview
 
 @Composable
-fun KanbanBoard() {
+fun KanbanBoard(
+    modifier: Modifier = Modifier
+) {
     var showDialog by remember { mutableStateOf(false) }
 
-    var todoCards by remember { mutableStateOf(emptyList<Card>()) }
-    var inProgressCards by remember { mutableStateOf(emptyList<Card>()) }
-    var doneCards by remember { mutableStateOf(emptyList<Card>()) }
-
-    val totalCount = todoCards.size + inProgressCards.size + doneCards.size
-    val doneCount = doneCards.size
+    val boardState by remember { mutableStateOf(KanbanboardState(Status.entries.associateWith { emptyList() })) }
 
     val snackBarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
@@ -56,7 +52,7 @@ fun KanbanBoard() {
         snackbarHost = {
             SnackbarHost(
                 hostState = snackBarHostState,
-                modifier = Modifier
+                modifier = modifier
                     .padding(horizontal = 16.dp, vertical = 14.dp),
             ) { snackbarData ->
                 Snackbar(
@@ -76,14 +72,14 @@ fun KanbanBoard() {
                     Text(text = snackbarData.visuals.message)
                 }
             }
-        }
+        },
     ) { contentPadding ->
         Column(
-            modifier = Modifier.padding(contentPadding)
+            modifier = Modifier.padding(contentPadding),
         ) {
             BoardInfoHeader(
-                totalCount = totalCount,
-                doneCount = doneCount,
+                totalCount =  boardState.totalAddCard(),
+                doneCount = boardState.doneAddCard(),
                 onTaskCreate = {
                     showDialog = true
                 },
@@ -99,11 +95,7 @@ fun KanbanBoard() {
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
             ) {
                 Status.entries.forEach { status ->
-                    val statusCards = when (status) {
-                        Status.TODO -> todoCards
-                        Status.IN_PROGRESS -> inProgressCards
-                        Status.DONE -> doneCards
-                    }
+                    val statusCards = boardState.statusCards(status)
                     BoardTaskBox(
                         boardTaskStatus = status,
                         cards = statusCards,
@@ -120,11 +112,7 @@ fun KanbanBoard() {
             onDismissRequest = { showDialog = false },
             onCreateConfirm = { status, card ->
                 showDialog = false
-                when (status) {
-                    Status.TODO -> todoCards = todoCards + card
-                    Status.IN_PROGRESS -> inProgressCards = inProgressCards + card
-                    Status.DONE -> doneCards = doneCards + card
-                }
+                boardState.addCard(status, card)
                 scope.launch {
                     snackBarHostState.currentSnackbarData?.dismiss()
                     snackBarHostState.showSnackbar(
