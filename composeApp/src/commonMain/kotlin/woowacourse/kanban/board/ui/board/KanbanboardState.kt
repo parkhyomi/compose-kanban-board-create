@@ -1,10 +1,18 @@
 package woowacourse.kanban.board.ui.board
 
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import woowacourse.kanban.board.domain.model.Card
 import woowacourse.kanban.board.domain.model.Status
+
+
+@Composable
+fun rememberKanbanboardState(
+    initialStatusCards: Map<Status, List<Card>> = Status.entries.associateWith { emptyList() },
+): KanbanboardState = remember(initialStatusCards) { KanbanboardState(initialStatusCards) }
 
 class KanbanboardState(
     initialStatusCards: Map<Status, List<Card>>,

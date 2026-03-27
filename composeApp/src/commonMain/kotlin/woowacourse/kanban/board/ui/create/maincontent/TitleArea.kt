@@ -9,6 +9,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import kanbanboard.composeapp.generated.resources.Res
 import kanbanboard.composeapp.generated.resources.title_error_message
@@ -18,6 +19,8 @@ import org.jetbrains.compose.resources.stringResource
 import woowacourse.kanban.board.ui.component.Label
 import woowacourse.kanban.board.ui.component.SingleLineTextField
 import woowacourse.kanban.board.ui.preview.KanbanPreview
+
+internal const val TITLE_INPUT_TEST_TAG = "title_input"
 
 @Composable
 fun TitleArea(
@@ -35,7 +38,9 @@ fun TitleArea(
             true,
         )
         SingleLineTextField(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .testTag(TITLE_INPUT_TEST_TAG),
             value = value,
             onValueChange = onTitleChange,
             isError = isError,

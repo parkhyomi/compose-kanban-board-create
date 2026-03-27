@@ -8,9 +8,11 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.runComposeUiTest
 import androidx.compose.ui.semantics.ProgressBarRangeInfo
 import woowacourse.kanban.board.domain.model.taskComplete
+import woowacourse.kanban.board.ui.create.maincontent.TITLE_INPUT_TEST_TAG
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -45,6 +47,20 @@ class BoardHeaderTest {
 
         onNodeWithContentDescription("테스크 종료", useUnmergedTree = true)
             .assertDoesNotExist()
+    }
+
+    @Test
+    fun `태스크 생성 후 스낵바 메시지가 노출된다`() = runComposeUiTest {
+        setContent {
+            KanbanBoard()
+        }
+
+        onNodeWithText("새 태스크 생성").performClick()
+        onNodeWithTag(TITLE_INPUT_TEST_TAG).performTextInput("스낵바 카드")
+        onNodeWithText("생성").performClick()
+
+        onNodeWithText("새 태스크가 추가되었습니다.", useUnmergedTree = true)
+            .assertExists()
     }
 
 

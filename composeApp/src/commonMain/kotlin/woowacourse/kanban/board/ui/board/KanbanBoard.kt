@@ -37,11 +37,11 @@ import woowacourse.kanban.board.ui.preview.KanbanPreview
 
 @Composable
 fun KanbanBoard(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    boardState: KanbanboardState = rememberKanbanboardState(),
 ) {
-    var showDialog by remember { mutableStateOf(false) }
 
-    val boardState by remember { mutableStateOf(KanbanboardState(Status.entries.associateWith { emptyList() })) }
+    var showDialog by remember { mutableStateOf(false) }
 
     val snackBarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()

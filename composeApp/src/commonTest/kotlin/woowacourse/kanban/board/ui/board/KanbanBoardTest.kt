@@ -1,79 +1,38 @@
 package woowacourse.kanban.board.ui.board
 
-import androidx.compose.material3.SnackbarDuration
-import androidx.compose.material3.SnackbarHostState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
-import kotlin.test.assertNull
 import woowacourse.kanban.board.domain.model.Card
 import woowacourse.kanban.board.domain.model.Status
 import woowacourse.kanban.board.domain.model.User
-
-private const val TASK_CREATED_SNACKBAR = "새 태스크가 추가되었습니다."
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class KanbanBoardTest {
 
     @Test
-    fun `생성 시 선택한 상태에 맞는 컬럼에 추가된다`() {
-        val card = Card(title = "진행중 카드", user = User("디노"))
-        var todoCards = emptyList<Card>()
-        var inProgressCards = emptyList<Card>()
-        var doneCards = emptyList<Card>()
+    fun `태스크 생성 이벤트가 전달되면 선택한 상태 컬럼에 카드가 추가된다`() = runTest {
+        val initial = mapOf(
+            Status.TODO to listOf(Card(title = "todo-1", user = User("디노"))),
+            Status.IN_PROGRESS to listOf(
+                Card(title = "inprogress-1", user = User("제임스")),
+                Card(title = "inprogress-2", user = User("로미")),
+            ),
+            Status.DONE to emptyList(),
+        )
 
-        when (Status.IN_PROGRESS) {
-            Status.TODO -> todoCards = todoCards + card
-            Status.IN_PROGRESS -> inProgressCards = inProgressCards + card
-            Status.DONE -> doneCards = doneCards + card
-        }
+        val boardState = KanbanboardState(initial)
 
-        assertEquals(0, todoCards.size)
-        assertEquals(1, inProgressCards.size)
-        assertEquals(0, doneCards.size)
-    }
+        boardState.addCard(
+            Status.DONE,
+            Card("done-1", user = User("로미"))
+        )
 
-    @Test
-    fun `태스크 생성 완료 메시지가 노출된다`() = runTest {
-        val snackBarHostState = SnackbarHostState()
-        val snackbar = launch {
-            snackBarHostState.showSnackbar(
-                message = TASK_CREATED_SNACKBAR,
-                withDismissAction = true,
-                duration = SnackbarDuration.Indefinite,
-            )
-        }
-
-        advanceUntilIdle()
-        val currentMessage = snackBarHostState.currentSnackbarData?.visuals?.message
-        assertEquals(TASK_CREATED_SNACKBAR, currentMessage)
-
-        snackbar.cancel()
-    }
-
-    @Test
-    fun `아이콘을 누르면 스낵바가 닫힌다`() = runTest {
-        val snackBarHostState = SnackbarHostState()
-        val snackbar = launch {
-            snackBarHostState.showSnackbar(
-                message = TASK_CREATED_SNACKBAR,
-                withDismissAction = true,
-                duration = SnackbarDuration.Indefinite,
-            )
-        }
-
-        advanceUntilIdle()
-        val currentSnackBar = snackBarHostState.currentSnackbarData
-        assertNotNull(currentSnackBar)
-
-        currentSnackBar.dismiss()
-        advanceUntilIdle()
-        assertNull(snackBarHostState.currentSnackbarData)
-
-        snackbar.cancel()
+        assertEquals(1, boardState.statusCards(Status.TODO).size)
+        assertEquals(2, boardState.statusCards(Status.IN_PROGRESS).size)
+        assertEquals(1, boardState.statusCards(Status.DONE).size)
+        assertEquals(4, boardState.totalAddCard())
+        assertEquals(1, boardState.doneAddCard())
     }
 }
