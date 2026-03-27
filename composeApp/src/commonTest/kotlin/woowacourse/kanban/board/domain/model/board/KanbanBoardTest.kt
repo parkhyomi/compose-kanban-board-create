@@ -1,10 +1,11 @@
-package woowacourse.kanban.board.ui.board
+package woowacourse.kanban.board.domain.model.board
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import woowacourse.kanban.board.domain.model.Card
 import woowacourse.kanban.board.domain.model.Status
 import woowacourse.kanban.board.domain.model.User
+import woowacourse.kanban.board.ui.board.KanbanboardState
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
