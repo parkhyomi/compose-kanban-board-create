@@ -9,9 +9,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -30,10 +27,9 @@ fun KanbanCreateDialogContent(
     onDismiss: () -> Unit,
     onCreateConfirm: (Status, Card) -> Unit,
     modifier: Modifier = Modifier,
+    state: KanbanCreateDialogContentState = rememberKanbanCreateDialogContentState(),
+    managers: List<User> = User.managersList,
 ) {
-    val managers = User.managersList
-    val state by remember { mutableStateOf(KanbanCreateDialogContentState(managers.first())) }
-
     Column(
         modifier = modifier
             .background(Color.White),

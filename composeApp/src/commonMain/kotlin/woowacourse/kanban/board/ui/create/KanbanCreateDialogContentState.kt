@@ -1,14 +1,21 @@
 package woowacourse.kanban.board.ui.create
 
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import woowacourse.kanban.board.domain.model.Card
 import woowacourse.kanban.board.domain.model.Status
 import woowacourse.kanban.board.domain.model.Tag
 import woowacourse.kanban.board.domain.model.User
 import woowacourse.kanban.board.domain.validator.validateTagInput
+
+@Composable
+fun rememberKanbanCreateDialogContentState(
+    initialSelectedUser: User = User.managersList.first(),
+): KanbanCreateDialogContentState = remember { KanbanCreateDialogContentState(initialSelectedUser) }
 
 @Stable
 class KanbanCreateDialogContentState(

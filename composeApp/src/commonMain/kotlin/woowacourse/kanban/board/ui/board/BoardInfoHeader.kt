@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.sp
 import kanbanboard.composeapp.generated.resources.Res
 import kanbanboard.composeapp.generated.resources.create_task_text
 import org.jetbrains.compose.resources.stringResource
-import woowacourse.kanban.board.domain.model.taskComplete
+import woowacourse.kanban.board.domain.model.calculateCompletionPercent
 import woowacourse.kanban.board.ui.preview.KanbanPreview
 import woowacourse.kanban.board.ui.theme.Blue
 
@@ -39,7 +39,7 @@ fun BoardInfoHeader(
     modifier: Modifier = Modifier,
 ) {
 
-    val complete = taskComplete(doneCount, totalCount)
+    val complete = calculateCompletionPercent(doneCount, totalCount)
 
     Column(
         modifier = modifier.fillMaxWidth(),
@@ -119,13 +119,13 @@ private fun BoardInfoHeaderPreview() {
     BoardInfoHeader(
         totalCount = 10,
         doneCount = 5,
-        onTaskCreate = { }
+        onTaskCreate = { },
     )
 }
 
 @Preview
 @Composable
-private fun BoardInfoHeader_ProgressPreview() {
+private fun BoardInfoHeaderProgressPreview() {
     BoardInfoHeaderProgressBar(
         completionPercent = 50,
     )
@@ -133,6 +133,6 @@ private fun BoardInfoHeader_ProgressPreview() {
 
 @Preview
 @Composable
-private fun BoardInfoHeader_ContentButtonPreview() {
+private fun BoardInfoHeaderContentButtonPreview() {
     BoardInfoHeaderContentButton(onTaskCreate = { })
 }
