@@ -1,0 +1,133 @@
+package woowacourse.kanban.board.ui.board
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import kanbanboard.composeapp.generated.resources.Res
+import kanbanboard.composeapp.generated.resources.task_created_snackbar_message
+import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.stringResource
+import woowacourse.kanban.board.domain.model.Status
+import woowacourse.kanban.board.ui.component.BoardTaskBoxDefaults
+import woowacourse.kanban.board.ui.create.KanbanCreateDialog
+import woowacourse.kanban.board.ui.preview.KanbanPreview
+
+@Composable
+fun KanbanBoard(
+    modifier: Modifier = Modifier,
+    boardState: KanbanBoardState = rememberKanbanBoardState(),
+) {
+
+    var showDialog by remember { mutableStateOf(false) }
+
+    val snackBarHostState = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
+
+    val taskCreatedSnackbarMessage = stringResource(Res.string.task_created_snackbar_message)
+
+    Scaffold(
+        snackbarHost = {
+            SnackbarHost(
+                hostState = snackBarHostState,
+                modifier = modifier
+                    .padding(horizontal = 16.dp, vertical = 14.dp),
+            ) { snackbarData ->
+                Snackbar(
+                    dismissAction = {
+                        IconButton(
+                            onClick = {
+                                snackbarData.dismiss()
+                            },
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Close,
+                                contentDescription = "스낵바 닫기",
+                            )
+                        }
+                    },
+                ) {
+                    Text(text = snackbarData.visuals.message)
+                }
+            }
+        },
+    ) { contentPadding ->
+        Column(
+            modifier = Modifier.padding(contentPadding),
+        ) {
+            BoardInfoHeader(
+                totalCount =  boardState.totalAddCard(),
+                doneCount = boardState.doneAddCard(),
+                onTaskCreate = {
+                    showDialog = true
+                },
+                modifier = Modifier
+                    .background(Color.White)
+                    .padding(horizontal = 24.dp, vertical = 16.dp),
+            )
+            HorizontalDivider()
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 24.dp, vertical = 16.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+            ) {
+                Status.entries.forEach { status ->
+                    val statusCards = boardState.statusCards(status)
+                    BoardTaskBox(
+                        boardTaskStatus = status,
+                        cards = statusCards,
+                        boardTaskCount = statusCards.size,
+                        colors = BoardTaskBoxDefaults.colors(status),
+                        modifier = Modifier.weight(1f),
+                    )
+                }
+            }
+        }
+    }
+    if (showDialog) {
+        KanbanCreateDialog(
+            onDismissRequest = { showDialog = false },
+            onCreateConfirm = { status, card ->
+                showDialog = false
+                boardState.addCard(status, card)
+                scope.launch {
+                    snackBarHostState.currentSnackbarData?.dismiss()
+                    snackBarHostState.showSnackbar(
+                        message = taskCreatedSnackbarMessage,
+                        withDismissAction = true,
+                        duration = SnackbarDuration.Indefinite,
+                    )
+                }
+            },
+        )
+    }
+}
+
+@KanbanPreview
+@Composable
+private fun KanbanBoardPreview() {
+    KanbanBoard()
+}

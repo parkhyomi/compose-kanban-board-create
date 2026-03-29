@@ -1,40 +1,68 @@
-This is a Kotlin Multiplatform project targeting Android, Desktop (JVM).
+## 기능 요구 사항
 
-* [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./composeApp/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./composeApp/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./composeApp/src/jvmMain/kotlin)
-    folder is the appropriate location.
+- 칸반(Kanban)은 개발 단계를 거치면서 업무를 스케줄링하고 관리하는 시스템이다. 칸반은 이전 단계에서 일을 밀어 넣는 대신 다음 단계로 일을 끌어가는 것을 강조한다. 칸반은 업무를 시각화하고, 진행 중인 작업 수를 줄이고, 시스템을 통해 흐름을 극대화한다.
+  - 디자인 시안을 참고하여 칸반 보드를 구현한다. 
+  - 새 태스크 생성 버튼에 모달을 연결한다. 
+  - 각 상태별 태스크 개수를 트래킹한다. 
+  - 상태(To-Do, In Progress, Done)별 태스크 개수가 노출된다. 
+  - 전체 할 일 중 완료된 일의 비율을 계산한다.
 
-### Build and Run Android Application
+## 프로그래밍 요구 사항
 
-To build and run the development version of the Android app, use the run configuration from the run widget
-in your IDE’s toolbar or build it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:assembleDebug
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:assembleDebug
-  ```
+- Row와 Column, LazyRow와 LazyColumn 등 요구 사항에 적절한 컴포넌트를 선택한다.
+- 재사용 가능한 컴포넌트에 대해 고민해본다.
+- 적절한 테스트 방법을 활용하여 기능 요구 사항을 테스트한다.
+- 모든 요구 사항이 테스트 가능하진 않다. 스스로 판단해서 구분한다.
+- 특정 조건에 따라 Snackbar를 노출한다.
 
-### Build and Run Desktop (JVM) Application
+## 디자인 시안
 
-To build and run the development version of the desktop app, use the run configuration from the run widget
-in your IDE’s toolbar or run it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:run
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:run
-  ```
+[![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)](https://www.figma.com/design/3aBG3UfkTwmHM8BnPyahtT/8%EA%B8%B0-Android-%EB%A0%88%EB%B2%A81-%EB%AF%B8%EC%85%98-%EB%94%94%EC%9E%90%EC%9D%B8?node-id=21642-2&t=SPJymlvCZzu3Soms-1)
+
+# 🚀 2단계 - 칸반 보드 생성(보드)
+---
+
+- [x] 보드 헤더
+    - 생성하기 버튼
+        - 생성하기 버튼을 누르면 `KanbanDialog`가 보여진다.
+    - 헤더 제목
+    - 완료율 계산
+        - 완료율은 `(Done / 전체 태스크 수) * 100`으로 계산한다.
+        - 전체 태스크 수가 `0`이면 완료율은 `0%`로 처리한다.
+    - 완료율 바
+        - 완료율 계산 결과에 맞춰 바 길이가 변경된다.
+- [x] 보드 태스크 (ToDo, In Progress, Done)
+    - 헤더
+        - 제목
+        - 태스크 개수
+    - `KanbanCard`
+        - 생성 시 선택한 상태(ToDo, In Progress, Done)에 맞는 컬럼에 추가된다.
+- [X] 스낵바 (태스크가 생성됐을 때)
+    - 스낵바 내용
+    - 닫기 아이콘
 
 ---
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+### 테스트 기능 정의서
+
+- [X] 보드 헤더
+    - 생성하기 버튼
+        - 생성하기 버튼을 눌렀을 때 `KanbanDialog`가 뜬다.
+    - 헤더 제목
+        - 헤더 제목이 노출된다.
+    - 완료율 계산
+        - 완료율은 `(Done / 전체 태스크 수) * 100`으로 계산된다.
+        - 전체 태스크 수가 `0`이면 완료율은 `0%`로 표시된다.
+    - 완료율 바
+        - 완료율에 맞춰 바의 길이가 변경된다.
+- [X] 보드 태스크 (ToDo, In Progress, Done)
+    - 헤더
+        - 각 컬럼의 제목(ToDo, In Progress, Done)이 노출된다.
+        - 각 컬럼의 태스크 개수가 노출된다.
+    - `KanbanCard`
+        - 생성 시 선택한 상태에 맞는 컬럼에 추가된다.
+- [X] 스낵바 (태스크가 생성됐을 때)
+    - 스낵바 내용
+        - 태스크 생성 완료 메시지가 노출된다.
+    - 닫기 아이콘
+        - 아이콘을 누르면 스낵바가 닫힌다.
