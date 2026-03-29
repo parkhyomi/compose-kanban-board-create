@@ -10,11 +10,11 @@ import woowacourse.kanban.board.domain.model.Status
 
 
 @Composable
-fun rememberKanbanboardState(
+fun rememberKanbanBoardState(
     initialStatusCards: Map<Status, List<Card>> = Status.entries.associateWith { emptyList() },
-): KanbanboardState = remember(initialStatusCards) { KanbanboardState(initialStatusCards) }
+): KanbanBoardState = remember(initialStatusCards) { KanbanBoardState(initialStatusCards) }
 
-class KanbanboardState(
+class KanbanBoardState(
     initialStatusCards: Map<Status, List<Card>>,
 ) {
 

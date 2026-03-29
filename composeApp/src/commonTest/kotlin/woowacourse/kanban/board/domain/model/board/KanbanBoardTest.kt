@@ -5,7 +5,7 @@ import kotlinx.coroutines.test.runTest
 import woowacourse.kanban.board.domain.model.Card
 import woowacourse.kanban.board.domain.model.Status
 import woowacourse.kanban.board.domain.model.User
-import woowacourse.kanban.board.ui.board.KanbanboardState
+import woowacourse.kanban.board.ui.board.KanbanBoardState
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -23,7 +23,7 @@ class KanbanBoardTest {
             Status.DONE to emptyList(),
         )
 
-        val boardState = KanbanboardState(initial)
+        val boardState = KanbanBoardState(initial)
 
         boardState.addCard(
             Status.DONE,

@@ -38,7 +38,7 @@ import woowacourse.kanban.board.ui.preview.KanbanPreview
 @Composable
 fun KanbanBoard(
     modifier: Modifier = Modifier,
-    boardState: KanbanboardState = rememberKanbanboardState(),
+    boardState: KanbanBoardState = rememberKanbanBoardState(),
 ) {
 
     var showDialog by remember { mutableStateOf(false) }

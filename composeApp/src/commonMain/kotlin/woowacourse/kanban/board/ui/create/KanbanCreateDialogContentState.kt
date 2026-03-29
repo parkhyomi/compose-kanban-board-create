@@ -15,7 +15,9 @@ import woowacourse.kanban.board.domain.validator.validateTagInput
 @Composable
 fun rememberKanbanCreateDialogContentState(
     initialSelectedUser: User = User.managersList.first(),
-): KanbanCreateDialogContentState = remember { KanbanCreateDialogContentState(initialSelectedUser) }
+): KanbanCreateDialogContentState = remember(initialSelectedUser) {
+    KanbanCreateDialogContentState(initialSelectedUser)
+}
 
 @Stable
 class KanbanCreateDialogContentState(
