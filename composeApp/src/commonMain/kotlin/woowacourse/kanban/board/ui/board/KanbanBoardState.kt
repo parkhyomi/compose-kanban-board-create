@@ -8,7 +8,6 @@ import androidx.compose.runtime.setValue
 import woowacourse.kanban.board.domain.model.Card
 import woowacourse.kanban.board.domain.model.Status
 
-
 @Composable
 fun rememberKanbanBoardState(
     initialStatusCards: Map<Status, List<Card>> = Status.entries.associateWith { emptyList() },
@@ -18,33 +17,22 @@ class KanbanBoardState(
     initialStatusCards: Map<Status, List<Card>>,
 ) {
 
-    var todoCards by mutableStateOf(initialStatusCards[Status.TODO].orEmpty())
-        private set
-
-    var inProgressCards by mutableStateOf(initialStatusCards[Status.IN_PROGRESS].orEmpty())
-        private set
-
-    var doneCards by mutableStateOf(initialStatusCards[Status.DONE].orEmpty())
-        private set
+    private var cardsByStatus by mutableStateOf(
+        Status.entries.associateWith { initialStatusCards[it].orEmpty() }
+    )
 
     fun statusCards(status: Status): List<Card> =
-        when (status) {
-            Status.TODO -> todoCards
-            Status.IN_PROGRESS -> inProgressCards
-            Status.DONE -> doneCards
-        }
+        cardsByStatus[status].orEmpty()
 
     fun addCard(status: Status, card: Card) {
-        when (status) {
-            Status.TODO -> todoCards = todoCards + card
-            Status.IN_PROGRESS -> inProgressCards = inProgressCards + card
-            Status.DONE -> doneCards = doneCards + card
-        }
+        val newCards = cardsByStatus.toMutableMap()
+        newCards[status] = newCards[status].orEmpty() + card
+        cardsByStatus = newCards
     }
 
     fun totalAddCard(): Int {
-        return todoCards.size + inProgressCards.size + doneCards.size
+        return cardsByStatus.values.sumOf { it.size }
     }
 
-    fun doneAddCard(): Int = doneCards.size
+    fun doneAddCard(): Int = cardsByStatus[Status.DONE].orEmpty().size
 }
